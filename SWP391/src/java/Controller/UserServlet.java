@@ -5,14 +5,17 @@
  */
 package Controller;
 
-import DTO.UserDTO;
+
 import Dao.UserDAO;
+import Model.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,7 +46,7 @@ public class UserServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
      try {
@@ -55,8 +58,8 @@ public class UserServlet extends HttpServlet {
                 case "showSignupForm":
                     showSignupForm(request, response);
                     break ; 
-                case "list2":
-                    listUsers2(request, response);
+                case "adminPage":
+                    adminPage(request, response);
                     break;
                 case "showLoginForm":
                     showLoginForm(request, response);
@@ -70,8 +73,11 @@ public class UserServlet extends HttpServlet {
                 case "ShowManagerPage":
                     ShowManagerPage(request, response);
                     break;
-                }
-           
+                
+                case "signup":
+                    createUser(request, response);
+                    break;
+            }
         } catch (SQLException e) {
             log("UserServlet _ SQL _ " + e.getMessage());
         }
@@ -89,7 +95,13 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         
+          try {
+              processRequest(request, response);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          
     }
 
     /**
@@ -103,7 +115,11 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+          try {
+              processRequest(request, response);
+          } catch (ClassNotFoundException ex) {
+              Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }
 
     /**
@@ -116,7 +132,7 @@ public class UserServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
      private void ShowManagerPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("managerPage.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("managerpage.jsp");
 //          RequestDispatcher rd = request.getRequestDispatcher("dateTotal.jsp");
         rd.forward(request, response);
 
@@ -127,7 +143,7 @@ public class UserServlet extends HttpServlet {
         rd.forward(request, response);
 
     }
-     private void listUsers2(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+     private void adminPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("adminPage.jsp");
 //          RequestDispatcher rd = request.getRequestDispatcher("dateTotal.jsp");
         rd.forward(request, response);
@@ -155,18 +171,20 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("CREATE_ERROR", errors);
             } else {
                
-                UserDTO result = userDAO.checkLogin(email,password);
-                if (result != null) {
-                    String  name = result.getName();
-                    session.setAttribute("userlogin", result);
+                Account loginUser = userDAO.checkLogin(email,password);
+                if (loginUser != null) {
+                    String  name = loginUser.getRoleid().getName();
+                    session.setAttribute("userlogin", loginUser);
                     if ("admin".equals(name)) {
-                        url = "UserServlet?action=list2";
+                        url = "UserServlet?action=adminPage";
                     }else  if ("manager".equals(name)) {
                       url = "UserServlet?action=ShowManagerPage";
                     }
                     else  if ("staff".equals(name)) {
                       url = "UserServlet?action=ShowStaffPage";
-                    }
+                    } else  if ("customer".equals(name)) {
+                      url = "UserServlet?action=ShowCustomerPage";}
+                    
                 } else {
                     // Invalid username or password
                     foundError = true;
@@ -175,7 +193,9 @@ public class UserServlet extends HttpServlet {
                 }
             }
 
-        } finally {
+        }catch(Exception e){
+            log("Error at LoginController"+e.toString());} 
+        finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
             out.close();
@@ -191,6 +211,24 @@ public class UserServlet extends HttpServlet {
     
     private void showSignupForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("signup.jsp").forward(request, response);
+    }
+
+    private void createUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
+        String url = "signup.jsp";
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String birthday = request.getParameter("birthday");
+        String gender = request.getParameter("gender");
+        UserDAO pdo =  new UserDAO();
+ 
+        pdo.insertuser(firstname,lastname, address, birthday,gender, email, password);
+        request.getRequestDispatcher("signup.jsp").forward(request, response);
+        
+
+//To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -5,11 +5,11 @@
  */
 package Controller;
 
-import DTO.CategoryDTO;
-import DTO.MaterialDTO;
+import Model.Category;
+import Model.Material;
 import Dao.CategoryDAO;
 import Dao.ProductDAO;
-import Dao.materialDAO;
+import Dao.MaterialDAO;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -50,14 +50,14 @@ public class createProduct extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             CategoryDAO cdo = new CategoryDAO();
-            List<CategoryDTO> list = cdo.getAll();
+            List<Category> list = cdo.getAll();
             request.setAttribute("list", list);
             
-            materialDAO materialDAO = new materialDAO();
-            List<MaterialDTO> listMaterial = materialDAO.getAll();
+            MaterialDAO materialDAO = new MaterialDAO();
+            List<Material> listMaterial = materialDAO.getAll();
             request.setAttribute("list", list);
             request.setAttribute("listMaterial", listMaterial);
-            request.getRequestDispatcher("createProduct.jsp").forward(request, response);
+            request.getRequestDispatcher("createproduct.jsp").forward(request, response);
         }
     }
 
@@ -110,9 +110,10 @@ public class createProduct extends HttpServlet {
                     part.write(uploadPath + File.separator + fileName);
                 } 
             };
-            pdo.insert(name, code, material, size, price, discount, cateID, quantity, fileName);
+            
 //                    String name, String material, String size, String price, String discount, String cateID, String quantity, String productLink
                         request.setAttribute("message", "Create Product Successful!");
+                        pdo.insert(name, code, material, size, price, discount, cateID, quantity, fileName);
         } catch (FileNotFoundException fne) {
             request.setAttribute("message", "There was an error: " + fne.getMessage());
         }

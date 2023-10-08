@@ -393,27 +393,28 @@
                 <!--<table id="productTable">-->
                 <table id="example-table" >
 
+                  
                     <c:forEach var="product" items="${products}" end="15">
                         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                             <div class="product-item bg-light mb-4">
                                 <div class="product-img position-relative overflow-hidden">                             
-                                    <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 150px; height: 250px">                          
+                                    <img class="img-fluid w-100" src="img/${product.image}" alt="" style="width: 150px; height: 250px">                          
                                     <div class="product-action">
 
                                         <a class="btn btn-outline-dark btn-square"
-                                           href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
+                                           href="CartServlet?action=add&productID=${product.productID}&name=${product.name}&price=${product.price}&QuantitySold=1&image=${product.image}">
                                             <i class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productID=${product.productID}"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productId=${product.productId}">${product.productName}</a>
+                                    <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productID=${product.productID}">${product.name}</a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h5 style="color: red">₫${product.price}</h5><h6 class="text-muted ml-2"><del></del></h6>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
 
-                                        <small>Số Lượng: ${product.quantity}</small>
+                                        <small>Số Lượng: ${product.quantitySold}</small>
                                     </div>
                                 </div>
                             </div>

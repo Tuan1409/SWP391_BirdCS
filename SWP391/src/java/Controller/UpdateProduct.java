@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateProduct", urlPatterns = {"/update"})
+
 public class UpdateProduct extends HttpServlet {
    
     /** 
@@ -86,7 +86,7 @@ public class UpdateProduct extends HttpServlet {
         }
         ProductDAO pdo = new ProductDAO();
         pdo.updateSP(id, size, name, giasp, discountsp, categorysp,quantity, isAvailable);
-        response.sendRedirect("product");
+        response.sendRedirect("ManagerProductController");
     }
 
     /** 

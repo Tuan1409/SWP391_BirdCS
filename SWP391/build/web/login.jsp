@@ -319,7 +319,7 @@
     <script src="js/common.js"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script>
+<!--    <script>
         window.onload = function () {
             let isValid = false;
             const form = document.getElementById("form");
@@ -333,6 +333,6 @@
                 }
             });
         }
-    </script>
+    </script>-->
 </body>
 </html>

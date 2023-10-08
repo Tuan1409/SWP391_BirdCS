@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -11,35 +12,43 @@ import java.time.LocalDate;
  * @author kienb
  */
 public class Account {
-    private int id;
-    private String firstName;
-    private String lastName;
+    private int  id;
+    private String firstname;
+    private String lastname;
     private String password;
     private String email;
-    private LocalDate birthday;
-    private Role role;
+    private Date birthday;
+    private Role roleid;
     private String address;
     private boolean isActive;
     private boolean gender;
     private String image;
-    private Account supervisor;
+    
 
     public Account() {
     }
 
-    public Account(int id, String firstName, String lastName, String password, String email, LocalDate birthday, Role role, String address, boolean isActive, boolean gender, String image, Account supervisor) {
+    public Account(int id, String firstname, String lastname, String password, String email, Date birthday, Role roleid, String address, boolean isActive, boolean gender, String image) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.password = password;
         this.email = email;
         this.birthday = birthday;
-        this.role = role;
+        this.roleid = roleid;
         this.address = address;
         this.isActive = isActive;
         this.gender = gender;
         this.image = image;
-        this.supervisor = supervisor;
+    }
+
+   
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public boolean isGender() {
+        return gender;
     }
 
     public int getId() {
@@ -50,20 +59,20 @@ public class Account {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getPassword() {
@@ -82,20 +91,20 @@ public class Account {
         this.email = email;
     }
 
-    public LocalDate getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(LocalDate birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
-    public Role getRole() {
-        return role;
+    public Role getRoleid() {
+        return roleid;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleid(Role roleId) {
+        this.roleid = roleId;
     }
 
     public String getAddress() {
@@ -106,7 +115,7 @@ public class Account {
         this.address = address;
     }
 
-    public boolean isIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
@@ -114,7 +123,7 @@ public class Account {
         this.isActive = isActive;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 
@@ -130,13 +139,12 @@ public class Account {
         this.image = image;
     }
 
-    public Account getSupervisor() {
-        return supervisor;
+    @Override
+    public String toString() {
+        return "Account{" + "id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", password=" + password + ", email=" + email + ", birthday=" + birthday + ", roleid=" + roleid + ", address=" + address + ", isActive=" + isActive + ", gender=" + gender + ", image=" + image + '}';
     }
 
-    public void setSupervisor(Account supervisor) {
-        this.supervisor = supervisor;
-    }
+    
 
     
     

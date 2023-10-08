@@ -4,35 +4,30 @@
  */
 package Model;
 
-import java.math.BigDecimal;
-import java.util.List;
-
-/**
- *
- * @author kienb
- */
 public class Product {
-    private int id;
+    private int productID;
     private String name;
     private String code;
-    private String size;
-    private BigDecimal price;
-    private double discount;
+    private int material;
+    private String size;   
+    private int price;
+    private float discount;
     private Category category;
     private int stock;
-    private boolean isAvailable;
+    private int isAvailable;
     private int quantitySold;
-    private BigDecimal ratesum;
-    private BigDecimal ratecount;
-    private List<Image> listImage;
-    private Material material;
+    private double rate_sum;
+    private double rate_count;
+    private String image;
+
     public Product() {
     }
 
-    public Product(int id, String name, String code, String size, BigDecimal price, double discount, Category category, int stock, boolean isAvailable, int quantitySold, BigDecimal ratesum, BigDecimal ratecount, List<Image> listImage, Material material) {
-        this.id = id;
+    public Product(int productID, String name, String code, int material, String size, int price, float discount, Category category, int stock, int isAvailable, int quantitySold, double rate_sum, double rate_count, String image) {
+        this.productID = productID;
         this.name = name;
         this.code = code;
+        this.material = material;
         this.size = size;
         this.price = price;
         this.discount = discount;
@@ -40,26 +35,19 @@ public class Product {
         this.stock = stock;
         this.isAvailable = isAvailable;
         this.quantitySold = quantitySold;
-        this.ratesum = ratesum;
-        this.ratecount = ratecount;
-        this.listImage = listImage;
-        this.material = material;
+        this.rate_sum = rate_sum;
+        this.rate_count = rate_count;
+        this.image = image;
     }
 
-    public Material getMaterial() {
-        return material;
+  
+
+    public int getProductID() {
+        return productID;
     }
 
-    public void setMaterial(Material material) {
-        this.material = material;
-    }    
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setProductID(int productID) {
+        this.productID = productID;
     }
 
     public String getName() {
@@ -78,6 +66,14 @@ public class Product {
         this.code = code;
     }
 
+    public int getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(int material) {
+        this.material = material;
+    }
+
     public String getSize() {
         return size;
     }
@@ -86,19 +82,19 @@ public class Product {
         this.size = size;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public double getDiscount() {
+    public float getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(float discount) {
         this.discount = discount;
     }
 
@@ -110,6 +106,8 @@ public class Product {
         this.category = category;
     }
 
+    
+
     public int getStock() {
         return stock;
     }
@@ -118,11 +116,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public boolean isIsAvailable() {
+    public int getIsAvailable() {
         return isAvailable;
     }
 
-    public void setIsAvailable(boolean isAvailable) {
+    public void setIsAvailable(int isAvailable) {
         this.isAvailable = isAvailable;
     }
 
@@ -134,29 +132,77 @@ public class Product {
         this.quantitySold = quantitySold;
     }
 
-    public BigDecimal getRatesum() {
-        return ratesum;
+    public double getRate_sum() {
+        return rate_sum;
     }
 
-    public void setRatesum(BigDecimal ratesum) {
-        this.ratesum = ratesum;
+    public void setRate_sum(double rate_sum) {
+        this.rate_sum = rate_sum;
     }
 
-    public BigDecimal getRatecount() {
-        return ratecount;
+    public double getRate_count() {
+        return rate_count;
     }
 
-    public void setRatecount(BigDecimal ratecount) {
-        this.ratecount = ratecount;
+    public void setRate_count(double rate_count) {
+        this.rate_count = rate_count;
     }
 
-    public List<Image> getListImage() {
-        return listImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setListImage(List<Image> listImage) {
-        this.listImage = listImage;
+    public void setImage(String image) {
+        this.image = image;
     }
+
+    
+ 
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 43 * hash + this.productID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        return this.productID == other.productID;
+    }
+
+//    @Override
+
+    @Override
+    public String toString() {
+        return "Product{" + "productID=" + productID + ", name=" + name + ", code=" + code + ", material=" + material + ", size=" + size + ", price=" + price + ", discount=" + discount + ", category=" + category + ", stock=" + stock + ", isAvailable=" + isAvailable + ", quantitySold=" + quantitySold + ", rate_sum=" + rate_sum + ", rate_count=" + rate_count + ", image=" + image + '}';
+    }
+
+    public void setProductName(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setProductPrice(double aDouble) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void setProductLink(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+   
+
+
     
     
 }

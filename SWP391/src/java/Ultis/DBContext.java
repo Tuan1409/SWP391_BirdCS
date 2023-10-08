@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DBContext {
 
     
-    private static final String USER_NAME="sa";
+    private static final String USER_NAME="SA";
     private static final String PASSWORD="12345";
     private static final String DB_NAME="WEB_BAN_LONG_CHIM";
     public static Connection getConnection() throws ClassNotFoundException, SQLException{

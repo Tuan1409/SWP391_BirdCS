@@ -5,8 +5,8 @@
  */
 package Dao;
 
-import DTO.CategoryDTO;
-import DTO.MaterialDTO;
+import Model.Category;
+import Model.Material;
 import Ultis.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  *
  * @author Admin
  */
-public class materialDAO {
-    public List<MaterialDTO> getAll() {
-        List<MaterialDTO> list = new ArrayList<>();
+public class MaterialDAO {
+    public List<Material> getAll() {
+        List<Material> list = new ArrayList<>();
         String sql = "select * from Material";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -33,7 +33,7 @@ public class materialDAO {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                MaterialDTO m = new MaterialDTO(rs.getInt(1),rs.getString(2));
+                Material m = new Material(rs.getInt(1),rs.getString(2));
                 list.add(m);
             }
             return list;

@@ -1,10 +1,11 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Dao;
 
-import DTO.CategoryDTO;
+import Model.Category;
 import Ultis.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,8 +22,8 @@ import java.util.logging.Logger;
  */
 public class CategoryDAO {
 
-    public List<CategoryDTO> getAll() {
-        List<CategoryDTO> list = new ArrayList<>();
+    public List<Category> getAll() {
+        List<Category> list = new ArrayList<>();
         String sql = "select * from Category";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -32,7 +33,7 @@ public class CategoryDAO {
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CategoryDTO c = new CategoryDTO(rs.getInt(1),rs.getString(2));
+                Category c = new Category(rs.getInt(1),rs.getString(2));
                 list.add(c);
             }
             return list;

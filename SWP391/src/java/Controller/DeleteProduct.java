@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import DTO.ProductDTO;
+import Model.Product;
 import Dao.ProductDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,12 +35,12 @@ public class DeleteProduct extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
            String id = request.getParameter("id");
            ProductDAO pdo = new ProductDAO();
-           ProductDTO p = pdo.getProductByID(id);
+           Product p = pdo.getProductByID(id);
 //           p.setIsAvailable(0);
            pdo.deleteSP(id);
 //           pdo.updateSP(id, p.getSize(), p.getName(), String.valueOf(p.getPrice()), String.valueOf(p.getDiscount()), 
 //                   String.valueOf(p.getCategory().getId()), String.valueOf(p.getStock()),0);
-           response.sendRedirect("product");
+           response.sendRedirect("ManagerProductController");
         }
     } 
 

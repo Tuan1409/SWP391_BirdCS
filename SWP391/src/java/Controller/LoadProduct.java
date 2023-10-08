@@ -5,12 +5,12 @@
  */
 package Controller;
 
-import DTO.CategoryDTO;
-import DTO.MaterialDTO;
-import DTO.ProductDTO;
+import Model.Category;
+import Model.Material;
+import Model.Product;
 import Dao.CategoryDAO;
 import Dao.ProductDAO;
-import Dao.materialDAO;
+import Dao.MaterialDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "LoadProduct", urlPatterns = {"/loadProductByID"})
+
 public class LoadProduct extends HttpServlet {
 
     /**
@@ -42,14 +42,14 @@ public class LoadProduct extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             String id = request.getParameter("id");
             ProductDAO pdo = new ProductDAO();
-             ProductDTO p = pdo.getProductByID(id);
+             Product p = pdo.getProductByID(id);
             CategoryDAO cdo = new CategoryDAO();
-            List<CategoryDTO> listCate = cdo.getAll();
-            materialDAO mdo = new materialDAO();
-            List<MaterialDTO> listMate = mdo.getAll();
+            List<Category> listCate = cdo.getAll();
+            MaterialDAO mdo = new MaterialDAO();
+            List<Material> listMate = mdo.getAll();
           
             /* TODO output your page here. You may use following sample code. */
-            out.println("<form action=\"update\" method=\"POST\" id=\"updatesp\">\n"
+            out.println("<form action=\"UpdateProduct\" method=\"POST\" id=\"updatesp\">\n"
                     + "                            <div class=\"row\">\n"
                     + "                                <div class=\"form-group col-md-6\">\n"
                     + "                                    <label class=\"control-label\">Mã sản phẩm </label>\n"
@@ -79,7 +79,7 @@ public class LoadProduct extends HttpServlet {
                     + "                                    <label for=\"exampleSelect1\" class=\"control-label\">Danh mục</label>\n"
                     + "                                    <select class=\"form-control\" name=\"categorysp\">\n");
                                                             
-                                                            for(CategoryDTO i: listCate){
+                                                            for(Category i: listCate){
                                                                 if (i.getId() == p.getCategory().getId()) {
                                                                     out.println("<option selected value=\"" + i.getId() + "\">" + i.getName() + "</option>");
                                                                 } else {
@@ -94,7 +94,7 @@ public class LoadProduct extends HttpServlet {
                     + "                                    <label for=\"exampleSelect1\" class=\"control-label\">Nguyen lieu</label>\n"
                     + "                                    <select class=\"form-control\" name=\"materialsp\">\n");
                                                             
-                                                            for(MaterialDTO i: listMate){
+                                                            for(Material i: listMate){
                                                                 if (i.getId()== p.getMaterial()) {
                                                                     out.println("<option selected value=\"" + i.getId() + "\">" + i.getOriginal()+ "</option>");
                                                                 } else {

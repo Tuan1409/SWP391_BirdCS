@@ -68,7 +68,6 @@
     </head>
 
     <body class="app sidebar-mini rtl">
-        <jsp:include page="headerManager.jsp"/>
         <style>
             .Choicefile {
                 display: block;
@@ -139,7 +138,7 @@
                 margin-top: -2px;
             }
         </style>
-        <jsp:include page="headerAdmin.jsp"/>
+        <jsp:include page="managerpage.jsp"/>
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
@@ -225,7 +224,7 @@
                             </form>
                         </div>
                         <button class="btn btn-save" type="button" onclick="validateForm()">Lưu lại</button>
-                        <a class="btn btn-cancel" href="managerPage.jsp">Hủy bỏ</a>
+                        <a class="btn btn-cancel" href="managerproduct.jsp">Hủy bỏ</a>
                     </div>
 
 

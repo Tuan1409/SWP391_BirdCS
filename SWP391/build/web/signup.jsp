@@ -272,66 +272,19 @@
                             Tạo tài khoản
                         </h1><br>
                         <form class="signup-form" action="UserServlet?action=signup" method="POST">
-                            <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-                            <input class="auth-form-input" type="text" value="${param.username}" id="username" name="username" placeholder="Nhập tên người dùng"><br>
-                            <c:if test="${not empty errors.usernameBlankError}">
-                                <p class="error-message">
-                                    ${errors.usernameBlankError}
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty errors.usernameIsExisted}">
-                                <p class="error-message">
-                                    ${errors.usernameIsExisted}
-                                </p>
-                            </c:if>
-                            <input class="auth-form-input" type="text" id="fullname" name="fullname" value="${param.fullname}" placeholder="Nhập họ và tên"><br>
-                            <c:if test="${not empty errors.fullnameBlankError}">
-                                <p class="error-message">
-                                    ${errors.fullnameBlankError}
-                                </p>
-                            </c:if>
-                            <div class="input-icon">
-                                <input class="auth-form-input" type="password" name="password" id="password" placeholder="Nhập mật khẩu"/>
-                                <i class="fa fa-eye show-password"></i>
-                            </div>
-                            <c:if test="${not empty errors.passwordBlankError}">
-                                <p class="error-message">
-                                    ${errors.passwordBlankError}
-                                </p>
-                            </c:if>
-                            <input class="auth-form-input" type="text" value="${param.email}" id="email" name="email" placeholder="Nhập Email"><br>
-                            <c:if test="${not empty errors.emailIsExisted}">
-                                <p class="error-message">
-                                    ${errors.emailIsExisted}
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty errors.emailBlankError}">
-                                <p class="error-message">
-                                    ${errors.emailBlankError}
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty errors.emailFormatError}">
-                                <p class="error-message">
-                                    ${errors.emailFormatError}
-                                </p>
-                            </c:if>
-                            <input class="auth-form-input" type="text" value="${param.address}" id="address" name="address" placeholder="Nhập nịa chỉ"><br>
-                            <input class="auth-form-input" type="text" value="${param.phoneNumber}" id="phoneNumber" name="phoneNumber" placeholder="Nhập số điện thoại"><br>
-                            <c:if test="${not empty errors.phoneFormatError}">
-                                <p class="error-message">
-                                    ${errors.phoneFormatError}
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty errors.phoneNumberIsExisted}">
-                                <p class="error-message">
-                                    ${errors.phoneNumberIsExisted}
-                                </p>
-                            </c:if>
-                            <c:if test="${not empty errors.phoneBlankError}">
-                                <p class="error-message">
-                                    ${errors.phoneBlankError}
-                                </p>
-                            </c:if>
+                           
+                            <input class="auth-form-input" type="text" value="${param.firstname}" id="fristname" name="firstname" placeholder="Nhập tên đầu"><br>
+                            
+                            <input class="auth-form-input" type="text" id="lastname" name="lastname" value="${param.lastname}" placeholder="Nhập tên sau"><br>
+                           
+                            <input class="auth-form-input" type="text" value="${param.email}" id="email" name="email" placeholder="Nhập email"><br>
+                           
+                            <input class="auth-form-input" type="password" name="password" id="password" placeholder="Nhập mật khẩu"/>
+                              
+                            <input class="auth-form-input" type="text" value="${param.address}" id="address" name="address" placeholder="Nhập địa chỉ"><br>
+                           
+                            <input class="auth-form-input" type="date" value="${param.birthday}" id="birthday" name="birthday" placeholder="Nhập ngay sinh"><br>
+                              <input class="auth-form-input" type="text" value="${param.gender}" id="address" name="gender" placeholder="Nhập gender"><br>
                             <div class="footer-action">
                                 <input type="submit" value="Tạo tài khoản" class="auth-submit"/>
                             </div>

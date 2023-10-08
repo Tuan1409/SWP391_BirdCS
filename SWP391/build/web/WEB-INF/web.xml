@@ -12,6 +12,58 @@
         <servlet-name>MyStoreServlet</servlet-name>
         <servlet-class>Controller.MyStoreServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerStaffController</servlet-name>
+        <servlet-class>Controller.ManagerStaffController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStaff</servlet-name>
+        <servlet-class>Controller.DeleteStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteProduct</servlet-name>
+        <servlet-class>Controller.DeleteProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManagerProductController</servlet-name>
+        <servlet-class>Controller.ManagerProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddStafff</servlet-name>
+        <servlet-class>Controller.AddStafff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListUserbyID</servlet-name>
+        <servlet-class>Controller.ListUserbyID</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadProduct</servlet-name>
+        <servlet-class>Controller.LoadProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUser</servlet-name>
+        <servlet-class>Controller.UpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProduct</servlet-name>
+        <servlet-class>Controller.UpdateProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateStaff</servlet-name>
+        <servlet-class>Controller.CreateStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadEmail</servlet-name>
+        <servlet-class>Controller.LoadEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductsServlet</servlet-name>
+        <servlet-class>Controller.ShowProductsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <servlet-class>Controller.ProductDetailServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePageController</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -27,12 +79,61 @@
         <servlet-name>MyStoreServlet</servlet-name>
         <url-pattern>/MyStoreServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerStaffController</servlet-name>
+        <url-pattern>/ManagerStaffController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStaff</servlet-name>
+        <url-pattern>/DeleteStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteProduct</servlet-name>
+        <url-pattern>/DeleteProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManagerProductController</servlet-name>
+        <url-pattern>/ManagerProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddStafff</servlet-name>
+        <url-pattern>/AddStafff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListUserbyID</servlet-name>
+        <url-pattern>/ListUserbyID</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadProduct</servlet-name>
+        <url-pattern>/LoadProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUser</servlet-name>
+        <url-pattern>/updateuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProduct</servlet-name>
+        <url-pattern>/UpdateProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateStaff</servlet-name>
+        <url-pattern>/CreateStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadEmail</servlet-name>
+        <url-pattern>/LoadEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductsServlet</servlet-name>
+        <url-pattern>/ShowProductsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductDetailServlet</servlet-name>
+        <url-pattern>/ProductDetailServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
-    </welcome-file-list>
 </web-app>
