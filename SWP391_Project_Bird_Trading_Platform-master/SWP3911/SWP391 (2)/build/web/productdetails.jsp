@@ -19,7 +19,7 @@
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
@@ -42,7 +42,7 @@
             int userID = 0;
             if(user!=null){
                     userID = user.getId();
-            }else request.getRequestDispatcher("Unauthorized.jsp").forward(request, response);
+            }
         %>
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
@@ -216,7 +216,7 @@
                                                     </div>
                                                     <p><c:out value="${feedback.content}" /></p>
                                                 </div>
-                                                <h3>${sessionScope.userlogin.roleid.name}</h3>
+                                                
                                                     <c:if test="${sessionScope.userlogin.roleid.name eq 'manager'}">
                                                         <a href="HideComment?commentID=${feedback.id}&productID=${productID}">Ẩn bình luận này</a>
                                                     </c:if>
@@ -239,48 +239,6 @@
 
 
 
-    <!-- Shop Detail End -->
-
-
-
-
-    <!-- San pham cung shop -->
-    <div class="container-fluid py-5">
-        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">CÁC SẢN PHẨM KHÁC CỦA SHOP</span></h2>
-        <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel related-carousel">
-
-
-                    <c:forEach items="${pro}" var="product">
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 50px; height: 180px">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square"
-                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
-                                        <i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productId=${product.productId}">${product.productName}</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5 style="color: red">₫${product.price}</h5><h6 class="text-muted ml-2"><del></del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-
-                                    <small>Số Lượng: ${product.quantity}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Products End -->
 
 
 
@@ -288,36 +246,38 @@
     <div class="container-fluid py-5">
         <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Sản Phẩm Cùng Loại</span></h2>
         <div class="row px-xl-5">
-            <div class="col">
-                <div class="owl-carousel related-carousel">
+            <table id="example-table" >
+                <c:forEach items="${productCategory}" var="product">
+                        <c:if test="${product.productID ne requestScope.nowProductID}">
+                            <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                            <div class="product-item bg-light mb-4">
+                                <div class="product-img position-relative overflow-hidden">
+                                    <img class="img-fluid w-100" src="img/${product.image}" alt="" style="width: 50px; height: 180px">
+                                    <div class="product-action">
+                                        <a class="btn btn-outline-dark btn-square"
+                                           href="CartServlet?action=add&sttPt=${product.productID}&productName=${product.name}&price=${product.price}&quantity=1&imageUrl=${product.image}">
+                                            <i class="fa fa-shopping-cart"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productID}"><i class='bx bx-detail'></i></a>
+                                    </div>
+                                </div>
+                                <div class="text-center py-4">
+                                    <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productId=${product.productID}">${product.name}</a>
+                                    <div class="d-flex align-items-center justify-content-center mt-2">
+                                        <h5 style="color: red">₫${product.price}</h5><h6 class="text-muted ml-2"><del></del></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center mb-1">
 
-
-                    <c:forEach items="${productCategory}" var="product">
-                        <div class="product-item bg-light">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="${product.image}" alt="" style="width: 50px; height: 180px">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square"
-                                       href="CartServlet?action=add&sttPt=${product.sttPT}&productName=${product.productName}&price=${product.price}&quantity=1&imageUrl=${product.image}&storeid=${product.storeId}">
-                                        <i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=${product.productId}"><i class="fa fa-search"></i></a>
+                                        <small>Số Lượng: ${product.stock}</small>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productId=${product.productId}">${product.productName}</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5 style="color: red">₫${product.price}</h5><h6 class="text-muted ml-2"><del></del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-
-                                    <small>Số Lượng: ${product.quantity}</small>
-                                </div>
-                            </div>
+                            
                         </div>
+                        </c:if>
+                        
                     </c:forEach>
-
-                </div>
-            </div>
+            </table>
+            
         </div>
     </div>
     <!-- Products End -->
@@ -420,115 +380,7 @@
         <!-- Data table plugin-->
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="./js/plugins/dataTables.bootstrap.min.js"></script>
-        <script type="text/javascript">
-                                                            var table;
-                                                            var list = ['checbox', 'productID',
-                                                                'productName', 'image',
-                                                                'productQuantity',
-                                                                'status',
-                                                                'productPrice',
-                                                                'category'];
-                                                            $(document).ready(function () {
-                                                                $('#sampleTable thead tr').clone(true)
-                                                                        .addClass('filters')
-                                                                        .appendTo('#sampleTable thead');
-                                                                table = $('#sampleTable').DataTable(
-                                                                        {
-                                                                            "bDestroy": true,
-                                                                            orderCellsTop: true,
-                                                                            fixedHeader: true,
-                                                                            initComplete: function () {
-                                                                                var api = this.api();
-                                                                                api
-                                                                                        .columns()
-                                                                                        .eq(0)
-                                                                                        .each(function (colIdx) {
-                                                                                            // Set the header cell to contain the input element
-                                                                                            if (colIdx === 0 || colIdx === 3) {
-                                                                                                var cell = $('.filters th').eq(
-                                                                                                        $(api.column(colIdx).header()).index()
-                                                                                                        );
-                                                                                                $(cell).html('');
-                                                                                            }
-                                                                                            if (colIdx > 0 && colIdx !== 3)
-                                                                                            {
-                                                                                                var cell = $('.filters th').eq(
-                                                                                                        $(api.column(colIdx).header()).index()
-                                                                                                        );
-                                                                                                var title = $(cell).text();
-                                                                                                $(cell).html('<input type="text" placeholder="' + title + '" \n\
-                                                                                                id="' + list[colIdx] + '" style="width: 100px" onchange="searchProduct()"/>');
-                                                                                                if (colIdx === 2) {
-                                                                                                    $(cell).html('<input type="text" placeholder="' + title + '" \n\
-                                                                                                id="' + list[colIdx] + '" style="width: 200px" onchange="searchProduct()"/>');
-                                                                                                }
-                                                                                                if (colIdx === 5) {
-                                                                                                    $(cell).html('<select style="width: 100px; height: 28px" onchange="searchProduct()" id="status"> \n' +
-                                                                                                            '<option selected></option>' +
-                                                                                                            '<option value="1">Còn hàng</option>' +
-                                                                                                            '<option value="2">Hết hàng</option>' +
-                                                                                                            '</select>'
-                                                                                                            );
-                                                                                                }
-                                                                                                if (colIdx === 7) {
-                                                                                                    var listJson = ${requestScope.listCate};
-                                                                                                    var txt = '<select style="width: 100px;height: 28px" onchange="searchProduct()" id="category"> \n';
-                                                                                                    txt += '<option selected></option> \n';
-                                                                                                    for (let j = 0; j < listJson.length; j++) {
-                                                                                                        txt += '<option value="' + listJson[j].id + '">' + listJson[j].name + '</option> \n';
-                                                                                                    }
-                                                                                                    txt += '</select>';
-                                                                                                    $(cell).html(txt);
-                                                                                                }
-                                                                                                if (colIdx === 8) {
-                                                                                                    $(cell).html('<a href="product" style="text-align: center">Đặt lại</a>');
-                                                                                                }
-                                                                                            }
-                                                                                        });
-                                                                            }
-                                                                        }
-                                                                )
-                                                            });
-                                                            //Thời Gian
-                                                            function time() {
-                                                                var today = new Date();
-                                                                var weekday = new Array(7);
-                                                                weekday[0] = "Chủ Nhật";
-                                                                weekday[1] = "Thứ Hai";
-                                                                weekday[2] = "Thứ Ba";
-                                                                weekday[3] = "Thứ Tư";
-                                                                weekday[4] = "Thứ Năm";
-                                                                weekday[5] = "Thứ Sáu";
-                                                                weekday[6] = "Thứ Bảy";
-                                                                var day = weekday[today.getDay()];
-                                                                var dd = today.getDate();
-                                                                var mm = today.getMonth() + 1;
-                                                                var yyyy = today.getFullYear();
-                                                                var h = today.getHours();
-                                                                var m = today.getMinutes();
-                                                                var s = today.getSeconds();
-                                                                m = checkTime(m);
-                                                                s = checkTime(s);
-                                                                nowTime = h + " giờ " + m + " phút " + s + " giây";
-                                                                if (dd < 10) {
-                                                                    dd = '0' + dd
-                                                                }
-                                                                if (mm < 10) {
-                                                                    mm = '0' + mm
-                                                                }
-                                                                today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                                                tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                                        '</span>';
-                                                                document.getElementById("clock").innerHTML = tmp;
-                                                                clocktime = setTimeout("time()", "1000", "Javascript");
-                                                                function checkTime(i) {
-                                                                    if (i < 10) {
-                                                                        i = "0" + i;
-                                                                    }
-                                                                    return i;
-                                                                }
-                                                            }
-        </script>
+       
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 const starsContainer = document.getElementById("star-rating");

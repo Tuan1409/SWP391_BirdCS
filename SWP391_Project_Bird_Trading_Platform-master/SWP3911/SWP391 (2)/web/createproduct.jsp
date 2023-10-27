@@ -201,7 +201,7 @@
                                 <div class="form-group col-md-4">
                                     <label class="control-label">Size</label>
                                     <input class="form-control" type="text" name="productSize" id="size">
-                                    <div class="error-message" id="price-error"></div>
+                                    <div class="error-message" id="size-error"></div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label">Discount</label>
@@ -364,6 +364,8 @@
                             var quantity = document.getElementById("quantity").value.trim();
                             var price = document.getElementById("price").value.trim();
                             var discount = document.getElementById("discount").value.trim();
+                            var code = document.getElementById("code").value.trim();
+                            var size = document.getElementById("size").value.trim();
                             
                             var imageError = document.getElementById("imageError");
 
@@ -403,6 +405,33 @@
                                  document.getElementById("quantity").style.borderColor = "";
                             }
 
+                            if (code === "") {
+                                document.getElementById("code").classList.add("error-input");
+                                document.getElementById("code-error").textContent = "Vui lòng nhập mã sản phẩm.";
+                                document.getElementById("code-error").style.color = "red";
+                                document.getElementById("code").style.borderColor = "red";
+                                isValid = false;
+                            } 
+                            else {
+                                document.getElementById("code").classList.remove("error-input");
+                                document.getElementById("code-error").textContent = "";
+                                document.getElementById("code-error").style.color = "";
+                                 document.getElementById("code").style.borderColor = "";
+                            }
+                            
+                            if (size === "") {
+                                document.getElementById("size").classList.add("error-input");
+                                document.getElementById("size-error").textContent = "Vui lòng nhập hình dáng và kích cỡ.";
+                                document.getElementById("size-error").style.color = "red";
+                                document.getElementById("size").style.borderColor = "red";
+                                isValid = false;
+                            } 
+                            else {
+                                document.getElementById("size").classList.remove("error-input");
+                                document.getElementById("size-error").textContent = "";
+                                document.getElementById("size-error").style.color = "";
+                                 document.getElementById("size").style.borderColor = "";
+                            }
 
 
                             if (price === "") {
@@ -434,9 +463,9 @@
                                 document.getElementById("discount-error").style.color = "red";
                                 document.getElementById("discount").style.borderColor = "red";
                                 isValid = false;
-                            } else if (discount < 0){
+                            } else if (discount < 0 || discount > 100){
                                 document.getElementById("discount").classList.add("error-input");
-                                document.getElementById("discount-error").textContent = " Discount vui lòng lớn hơn 0.";
+                                document.getElementById("discount-error").textContent = " Discount vui lòng lớn hơn 0 và nhỏ hơn 100.";
                                 document.getElementById("discount-error").style.color = "red";
                                 document.getElementById("discount").style.borderColor = "red";
                                 isValid = false;

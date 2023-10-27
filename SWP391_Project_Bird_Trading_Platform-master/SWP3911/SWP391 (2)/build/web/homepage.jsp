@@ -14,7 +14,7 @@
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
@@ -411,7 +411,7 @@
                                         <a class="btn btn-outline-dark btn-square"
                                            href="CartServlet?action=add&pid=${product.productID}">
                                             <i class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productID=${product.productID}"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productID=${product.productID}"><i class='bx bx-detail'></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">

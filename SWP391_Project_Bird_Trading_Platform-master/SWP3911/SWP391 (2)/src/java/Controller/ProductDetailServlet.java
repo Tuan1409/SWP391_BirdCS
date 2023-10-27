@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author DELL
+ * @author Admin
  */
 public class ProductDetailServlet extends HttpServlet {
 
@@ -46,8 +46,7 @@ public class ProductDetailServlet extends HttpServlet {
        //lấy hai productID để so sánh
         String productID = request.getParameter("productID");
         String id2 = request.getParameter("id2");    
-        System.out.println(productID + "-----------");
-        System.out.println(id2 + "-----------");
+       
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO cdo = new CategoryDAO();
         Product product = null;
@@ -61,7 +60,12 @@ public class ProductDetailServlet extends HttpServlet {
             list.add(product2);
         }
         
+        //Lấy sản phẩm cùng loại
+        String cateID = String.valueOf(product.getCategory().getId());
+        List<Product> productCategory = productDAO.getProductByCategory(cateID);
+        System.out.println(productCategory);
         session.setAttribute("productList", list);
+        request.setAttribute("productCategory", productCategory);
         List<Category> categoryList = cdo.getAll();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         request.setAttribute("listCate", gson.toJson(categoryList));
@@ -72,6 +76,7 @@ public class ProductDetailServlet extends HttpServlet {
         List<Comment> feedbacks = comDAO.getAllProductComment(productID);
         request.setAttribute("feedbacks", feedbacks);
         request.setAttribute("count", count);
+        request.setAttribute("nowProductID", productID);
         response.setContentType("application/json");
         RequestDispatcher dispatcher = request.getRequestDispatcher("productdetails.jsp");
         dispatcher.forward(request, response);

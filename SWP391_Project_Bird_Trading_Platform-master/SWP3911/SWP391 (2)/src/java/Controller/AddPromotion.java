@@ -96,22 +96,19 @@ public class AddPromotion extends HttpServlet {
         Date currentDate = Date.valueOf(LocalDate.now());
         if (dateStart.after(dateEnd)) {
             request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Ngày bắt đầu' và 'Ngày kết thúc'.");
-            request.getRequestDispatcher("PromotionServlet").forward(request, response);
-//        }else if (condition < 0 && quantity <= 0){
-//            request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Điều kiện' và 'Số lượng'.");
-//            request.getRequestDispatcher("PromotionServlet").forward(request, response);
-//        }else if (condition < 0){
-//            request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Điều kiện'.");
-//            request.getRequestDispatcher("PromotionServlet").forward(request, response);
-//        }else if (quantity <= 0){
-//            request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Số lượng'.");
-//            request.getRequestDispatcher("PromotionServlet").forward(request, response);
+            request.getRequestDispatcher("promotion").forward(request, response);
+        }else if (condition < 0){
+            request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Điều kiện'.");
+            request.getRequestDispatcher("promotion").forward(request, response);
+        }else if (condition < 0){
+            request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Điều kiện'.");
+            request.getRequestDispatcher("promotion").forward(request, response);
         } else if (value < 0){
             request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Giá trị'.");
-            request.getRequestDispatcher("PromotionServlet").forward(request, response);
+            request.getRequestDispatcher("promotion").forward(request, response);
         } else if (dateEnd.compareTo(currentDate) < 0){
             request.setAttribute("messAddPromotion", "Tạo promotion thất bại! Vui lòng kiểm tra lại 'Ngày kết thúc'.");
-            request.getRequestDispatcher("PromotionServlet").forward(request, response);
+            request.getRequestDispatcher("promotion").forward(request, response);
         } else {
             objectDao.addPromotion(promotionName, dateStart, dateEnd, promotionStatus, value, accID, condition);
             request.setAttribute("messAddPromotion", "Tạo promotion thành công!");
