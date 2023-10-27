@@ -54,9 +54,7 @@
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
             <div class="app-sidebar__user">
-             <a href="ViewProfile">
-    <img style="border-radius: 50%;" class="app-sidebar__user-avatar rounded" src="img/${sessionScope.userlogin.image}" width="100px" alt="User Image">
-</a>
+                <img style=" border-radius: 50%; " class="app-sidebar__user-avatar rounded" src="img/${sessionScope.userlogin.image}" width="100px"  alt="User Image">
                 <div>
                     <p class="app-sidebar__user-name"><b></b></p>
                     <p class="app-sidebar__user-designation">
@@ -92,7 +90,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="app-menu__item" href="ManageRequestController">
+                    <a class="app-menu__item" href="ManageRequestController?user=<%= user.getRoleid().getName()%>">
                         <i class='app-menu__icon bx bx-task'></i>
                         <span class="app-menu__label">Quản lý đơn đặt hàng</span>
                     </a>
@@ -101,6 +99,12 @@
                     <a class="app-menu__item" href="promotion">
                         <i class='app-menu__icon bx bx-dollar'></i>
                         <span class="app-menu__label">Quản lý khuyến mãi</span>
+                    </a>
+                </li> 
+                <li>
+                    <a class="app-menu__item" href="ShowProductsServlet?user=<%= user.getRoleid().getName()%>">
+                        <i class='app-menu__icon bx bx-home-alt-2'></i>
+                        <span class="app-menu__label">Quay về giao diện </span>
                     </a>
                 </li> 
                 <!--                <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span

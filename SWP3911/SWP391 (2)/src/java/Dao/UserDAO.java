@@ -33,7 +33,7 @@ public class UserDAO {
         PreparedStatement stm = null; 
         try{
             conn= DBContext.getConnection();
-               String sql = "SELECT e.* ,r.name FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE email =? "+" and password = ? and isActive='true' ";
+               String sql = "SELECT e.* ,r.name FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE email =? "+" and password = ?";
             stm = conn.prepareStatement(sql);
                stm.setString(1, email);
             stm.setString(2, password);
@@ -52,11 +52,10 @@ public class UserDAO {
                      boolean gender = rs.getBoolean("gender");
                      String image = rs.getString("image");
                      String name = rs.getString("name");
-                     String phone = rs.getString("phone");
                      Role role = new Role() ; 
                      role.setName(name);
 //                     role.setRoleid(rs.getInt(11));
-                     result = new Account(id, firstname,lastname, dbPassword, dbEmail, birthday, role, address,isActive,gender,image,phone);
+                     result = new Account(id, firstname,lastname, dbPassword, dbEmail, birthday, role, address,isActive,gender,image);
                      return result;
                 }
             }
@@ -83,7 +82,7 @@ public class UserDAO {
             
             conn = DBContext.getConnection();
             
-            String SHOW= "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name,e.phone FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE r.name = 'staff' ";
+            String SHOW= "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE r.name = 'staff' ";
         
             if (conn != null) {
                 ptm = conn.prepareStatement(SHOW);
@@ -114,7 +113,6 @@ public class UserDAO {
                         p.setPassword(rs.getString(9));
                         p.setImage(rs.getString(10));
                         p.setRoleid(new Role(-1,rs.getString(11)));
-                         p.setPhone(rs.getString(12));
                         if (!p.getImage().contains("http")) {
                     p.setImage("./img/" + p.getImage());
                 }
@@ -224,8 +222,8 @@ public class UserDAO {
     
     }
 
-    public void UpdateStaff(String id, String firstname, String lastname, String email, String birthday, String address, String gender, String password,String role,String phone,String image)  {
-        String sql = "UPDATE [dbo].[Account]  SET [FIRSTNAME] = ?, [LASTNAME] = ? ,[Birthday] = ? ,[Address] = ? ,[GENDER] = ? ,[PASSWORD] = ?,[EMAIL] = ?,[PHONE] = ?,[IMAGE] = ?,[RoleId] = ? WHERE ID = ?";
+    public void UpdateStaff(String id, String firstname, String lastname, String email, String birthday, String address, String gender, String password,String role)  {
+        String sql = "UPDATE [dbo].[Account]  SET [FIRSTNAME] = ?, [LASTNAME] = ? ,[Birthday] = ? ,[Address] = ? ,[GENDER] = ? ,[PASSWORD] = ?,[EMAIL] = ?,[RoleId] = ? WHERE ID = ?";
         Connection conn = null;
         PreparedStatement ps = null;
     
@@ -242,15 +240,12 @@ public class UserDAO {
             ps.setDate(3, Date.valueOf(birthday));
             ps.setString(4, address);
             ps.setString(5, gender);
-            ps.setString(6, password );
+             ps.setString(6, password );
             ps.setString(7, email);
-             ps.setString(8, phone);
-              ps.setString(9, image);
-            ps.setInt(10, Integer.parseInt(role));
-            ps.setInt(11, Integer.parseInt(id));
+            ps.setInt(8, Integer.parseInt(role));
+            ps.setInt(9, Integer.parseInt(id));
             ps.executeUpdate();
              return;
-             
         } catch (SQLException e) {
             // Handle the exception or log it
             e.printStackTrace();
@@ -273,7 +268,7 @@ public class UserDAO {
     }
 
     public Account getUserByID(String id) throws ClassNotFoundException {
-        String sql = "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name,e.phone FROM Account e left JOIN Role r ON e.roleid = r.roleid WHERE id = ?";
+        String sql = "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name FROM Account e left JOIN Role r ON e.roleid = r.roleid WHERE id = ?";
 
         Connection conn = null;
         PreparedStatement ps = null;
@@ -296,11 +291,7 @@ public class UserDAO {
                   p.setPassword(rs.getString(9));
                   p.setImage(rs.getString(10));
                   p.setRoleid(new Role(-1,rs.getString(11)));
-               p.setPhone(rs.getString(12));
-                if (!p.getImage().contains("http")) {
-                    p.setImage("./img/" + p.getImage());
-                }
-         
+               
                 return p;
             }
         } catch (SQLException e) {
@@ -345,47 +336,6 @@ public class UserDAO {
             while (rs.next()) {
                 String email = rs.getString("Email");
                 list.add(email);
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return list;//To change body of generated methods, choose Tools | Templates.
-    }
-      public List<String> getPhone() throws ClassNotFoundException {
-       List<String> list = new ArrayList<>();
-        String sql = "SELECT phone FROM Account";
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null; 
-           try {
-            conn = DBContext.getConnection();
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                String phone = rs.getString("Phone");
-                list.add(phone);
             }
         } catch (SQLException e) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -599,7 +549,7 @@ public class UserDAO {
         ResultSet rs = null;
         try {
             conn = DBContext.getConnection();            
-            String SHOW= "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name,e.phone FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE r.name = 'customer' ";
+            String SHOW= "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,r.name FROM Account e JOIN Role r ON e.roleid = r.roleid WHERE r.name = 'customer' ";
         
             if (conn != null) {
                 ptm = conn.prepareStatement(SHOW);
@@ -630,7 +580,6 @@ public class UserDAO {
                         p.setPassword(rs.getString(9));
                         p.setImage(rs.getString(10));
                         p.setRoleid(new Role(-1,rs.getString(11)));
-                        p.setPhone(rs.getString(12));
                         if (!p.getImage().contains("http")) {
                     p.setImage("./img/" + p.getImage());
                 }
@@ -670,49 +619,49 @@ public class UserDAO {
      //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public List<String> getPhone() throws ClassNotFoundException {
-//       List<String> list = new ArrayList<>();
-//        String sql = "SELECT phone FROM Account";
-//        Connection conn = null;
-//        PreparedStatement ps = null;
-//        ResultSet rs = null; 
-//           try {
-//            conn = DBContext.getConnection();
-//            ps = conn.prepareStatement(sql);
-//            rs = ps.executeQuery();
-//            while (rs.next()) {
-//                String phone = rs.getString("phone");
-//                list.add(phone);
-//            }
-//        } catch (SQLException e) {
-//            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
-//        } finally {
-//            if (rs != null) {
-//                try {
-//                    rs.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            if (ps != null) {
-//                try {
-//                    ps.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//            if (conn != null) {
-//                try {
-//                    conn.close();
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        }
-//        return list;//To change body of generated methods, choose Tools | Templates.
-//    }
+    public List<String> getPhone() throws ClassNotFoundException {
+       List<String> list = new ArrayList<>();
+        String sql = "SELECT phone FROM Account";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null; 
+           try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String phone = rs.getString("phone");
+                list.add(phone);
+            }
+        } catch (SQLException e) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, e);
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return list;//To change body of generated methods, choose Tools | Templates.
+    }
 
-     public ArrayList<Account> getAllUsers() {
+    public ArrayList<Account> getAllUsers() {
        ArrayList<Account> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -721,16 +670,34 @@ public class UserDAO {
             
             conn = DBContext.getConnection();
             
-            String SHOW= "SELECT email ,phone FROM Account  ";
+            String SHOW= "SELECT e.id,e.firstname,e.lastname,e.address,e.birthday,e.isActive,e.gender,e.email,e.password,e.image,e.phone,r.name FROM Account e JOIN Role r ON e.roleid = r.roleid ";
         
             if (conn != null) {
                 ptm = conn.prepareStatement(SHOW);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    String email = rs.getString("email");
-                    String phone = rs.getString("phone");
-                    Account lists = new Account(email,phone);
-                     list.add(lists);
+                    Account p = new Account();
+                        p.setId(rs.getInt(1));
+                        p.setFirstname(rs.getString(2));
+                        p.setLastname(rs.getString(3));
+                        p.setAddress(rs.getString(4));
+                        p.setBirthday(rs.getDate(5));
+                        p.setIsActive(rs.getBoolean(6));
+                        p.setGender(rs.getBoolean(7));
+                        p.setEmail(rs.getString(8));
+                        p.setPassword(rs.getString(9));
+                        p.setImage(rs.getString(10));
+                        p.setPhone(rs.getString(11));
+                        p.setRoleid(new Role(-1,rs.getString(11)));
+                        if (!p.getImage().contains("http")) {
+                    p.setImage("./img/" + p.getImage());
+                }
+                    list.add(p);    
+                        
+                        
+                        
+                        
+                     
                 }
             }
             return list;

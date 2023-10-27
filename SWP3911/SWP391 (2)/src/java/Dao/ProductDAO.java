@@ -209,8 +209,8 @@ public class ProductDAO {
         return list;
     }
 
-    public void updateSP(String id, String size, String name, String price, String discount, String cateID, String quantity, int isAvailable) {
-        String sql = " UPDATE Product SET name = ?, size = ?, price = ?, discount = ?, stock = ?, category = ?, isAvailable = ?\n" +
+    public void updateSP(String id, String size, String name, String price, String discount, String cateID, String quantity, int isAvailable, String material) {
+        String sql = " UPDATE Product SET name = ?, size = ?, price = ?, discount = ?, stock = ?, category = ?, isAvailable = ?, material = ?\n" +
 "	WHERE id = ?";
         Connection conn = null;
         PreparedStatement ps = null;
@@ -225,7 +225,8 @@ public class ProductDAO {
             ps.setInt(5, Integer.parseInt(quantity));
             ps.setInt(6, Integer.parseInt(cateID));
             ps.setInt(7, isAvailable);
-            ps.setInt(8, Integer.parseInt(id));
+            ps.setInt(8, Integer.parseInt(material));
+            ps.setInt(9, Integer.parseInt(id));
             ps.executeUpdate();
             return;
         } catch (SQLException e) {
@@ -633,71 +634,6 @@ public class ProductDAO {
         ProductDAO pdo = new ProductDAO();       
         
     }
-      public List<Product> searchProductsByMaterial(String materialName) {
-      ArrayList<Product> list = new ArrayList<>(); 
-       String sql = "Select p.*,c.original from Product p left join Material c on p.material = c.id where c.original = ?";
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-    try{
-        conn = DBContext.getConnection();
-              if (conn != null) {
-               ps = conn.prepareStatement(sql);
-               ps.setString(1, materialName);
-              
-               rs = ps.executeQuery();
-              }
-              while(rs.next()){
-                   Product p = new Product();
-                p.setProductID(rs.getInt(1));
-                p.setName(rs.getString(2));
-                p.setCode(rs.getString(3));
-                p.setMaterial(rs.getInt(4));
-                p.setSize(rs.getString(5));
-                p.setPrice(rs.getInt(6));
-                p.setDiscount(rs.getFloat(7));
-                p.setCategory(new Category(rs.getInt(8), rs.getString(15)));
-                p.setStock(rs.getInt(9));
-                p.setIsAvailable(rs.getInt(10));
-                p.setQuantitySold(rs.getInt(11));
-                p.setRate_sum(rs.getDouble(12));
-                p.setRate_count(rs.getDouble(13));
-                p.setImage(rs.getString(14));
-               
-            if (!p.getImage().contains("http")) {
-                   p.setImage("./img/" + p.getImage());              }
-                list.add(p);
-                
-              }
-//To change body of generated methods, choose Tools | Templates.
-    }catch(Exception e){
-        e.printStackTrace();
-    }finally{
-        if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-    }
-    return list; 
-    }
-    
 }
             
     

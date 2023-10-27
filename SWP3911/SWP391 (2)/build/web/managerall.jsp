@@ -87,7 +87,7 @@
                                         <th>Số điện thoại</th>
                                       <th>Chúc vụ</th>
                                      <th>Tình trạng</th>
-                                    <th>Chức năng</th>
+                                    <th></th>
                                         </tr>
                                     </thead>
 

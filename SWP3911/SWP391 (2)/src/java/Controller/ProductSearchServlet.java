@@ -89,7 +89,7 @@ public class ProductSearchServlet extends HttpServlet {
                     response.sendRedirect("searchProductsByPrice.jsp");
                     return;
              }else response.sendRedirect("searchProducts.jsp");
-            }else if (action.equals("searchByCategory")) {
+         }else if (action.equals("searchByCategory")) {
               String categoryName = request.getParameter("categoryName");
                 if (categoryName != null && !categoryName.isEmpty()) {
                     List<Product> products = productDAO.searchProductsByCategory(categoryName);
@@ -99,17 +99,7 @@ public class ProductSearchServlet extends HttpServlet {
                     response.sendRedirect("searchByCategory.jsp");
 
                     return;
-                }
-            }else if (action.equals("searchByMeterial")){
-                 String materialName = request.getParameter("materialName");
-                 if (materialName != null && !materialName.isEmpty()) {
-                     List<Product> products = productDAO.searchProductsByMaterial(materialName);
-                     HttpSession session = request.getSession(); 
-                     session.setAttribute("searchResultsMaterial", products);
-                     response.sendRedirect("searchByMaterial.jsp");
-                 }
-            }
-             
+                }}
          }
          
     }

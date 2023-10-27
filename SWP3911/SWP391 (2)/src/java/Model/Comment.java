@@ -4,31 +4,43 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 /**
  *
- * @author kienb
+ * @author Admin
  */
 public class Comment {
     private int id;
     private Account account;
     private Product product;
     private String content;
-    private LocalDateTime commentDate;
+    private Date commentDate;
     private int rate;
+    private boolean status;
 
-    public Comment() {
-    }
-
-    public Comment(int id, Account account, Product product, String content, LocalDateTime commentDate, int rate) {
+    public Comment(int id, Account account, Product product, String content, Date commentDate, int rate, boolean status) {
         this.id = id;
         this.account = account;
         this.product = product;
         this.content = content;
         this.commentDate = commentDate;
         this.rate = rate;
+        this.status = status;
     }
+
+    public Comment() {
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
 
     public int getId() {
         return id;
@@ -62,11 +74,11 @@ public class Comment {
         this.content = content;
     }
 
-    public LocalDateTime getCommentDate() {
+    public Date getCommentDate() {
         return commentDate;
     }
 
-    public void setCommentDate(LocalDateTime commentDate) {
+    public void setCommentDate(Date commentDate) {
         this.commentDate = commentDate;
     }
 

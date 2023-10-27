@@ -101,8 +101,7 @@
                                      <th>Birthday</th>
                                       <th>Gender</th>
                                       <th>Role</th>
-                                      <th>Phone</th>
-                                     <th>isActve</th>
+                                     <th> isActive</th>
                                     <th>Chức năng</th>
                                         </tr>
                                     </thead>
@@ -127,13 +126,12 @@
                                                     </c:if>
                                                 </td>
                                                 <td>${user.roleid.name}</td>
-                                                 <td>${user.phone}</td>
                                                  <td>
                                                     <c:if test="${user.isActive == true}">
-                                                         <span class="badge bg-success">tài khoản đang dùng</span>
+                                                         <span class="badge bg-success">Đang làm</span>
                                                     </c:if>
                                                     <c:if test="${user.isActive == false}">
-                                                         <span class="badge bg-danger">tài khoản đã bị khóa</span>
+                                                         <span class="badge bg-danger">Đã nghỉ </span>
                                                     </c:if>
                                                 </td>
                                                 <td style="display: flex; justify-content: space-left">

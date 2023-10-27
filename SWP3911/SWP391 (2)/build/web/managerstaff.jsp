@@ -76,17 +76,16 @@
                                         <tr>
                                             <th width="10"><input type="checkbox" id="all"></th>
                                             
-                                     <th>ID</th>
-                                         <th>Tên đầu</th>
-                                         <th>Tên sau</th>
+                                    <th>ID</th>
+                                         <th>Firstname</th>
+                                         <th>Lastname</th>
                                      <th>Email</th>
                                       <th>Ảnh</th>
-                                     <th>Địa chỉ</th>
-                                     <th>Ngày sinh</th>
-                                      <th>Giới tính</th>
-                                        <th>Số điện thoại</th>
-                                      <th>Chúc vụ</th>
-                                     <th>Tình trạng</th>
+                                     <th>Address</th>
+                                     <th>Birthday</th>
+                                      <th>Gender</th>
+                                      <th>Role</th>
+                                     <th> isActive</th>
                                     <th>Chức năng</th>
                                         </tr>
                                     </thead>
@@ -110,7 +109,6 @@
                                                         <span >Nữ</span>
                                                     </c:if>
                                                 </td>
-                                                <td>${user.phone}</td>
                                                 <td>${user.roleid.name}</td>
                                                  <td>
                                                     <c:if test="${user.isActive == true}">

@@ -6,8 +6,10 @@
 package Controller;
 
 import Dao.CategoryDAO;
+import Dao.CommentDAO;
 import Dao.ProductDAO;
 import Model.Category;
+import Model.Comment;
 import Model.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,15 +41,19 @@ public class ProductDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
        HttpSession session = request.getSession();
+       //lấy hai productID để so sánh
         String productID = request.getParameter("productID");
         String id2 = request.getParameter("id2");    
-        
+        System.out.println(productID + "-----------");
+        System.out.println(id2 + "-----------");
         ProductDAO productDAO = new ProductDAO();
         CategoryDAO cdo = new CategoryDAO();
         Product product = null;
         List<Product> list = new ArrayList<>();
         
+        //Cho hai product vào list để đưa tới detail
         product = productDAO.getProductByID(productID);
         list.add(product);
         if(id2!=null){
@@ -59,6 +65,13 @@ public class ProductDetailServlet extends HttpServlet {
         List<Category> categoryList = cdo.getAll();
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         request.setAttribute("listCate", gson.toJson(categoryList));
+        
+        //Lấy feedback của sản phẩm
+        CommentDAO comDAO = new CommentDAO();
+        int count = comDAO.countProductComment(productID);
+        List<Comment> feedbacks = comDAO.getAllProductComment(productID);
+        request.setAttribute("feedbacks", feedbacks);
+        request.setAttribute("count", count);
         response.setContentType("application/json");
         RequestDispatcher dispatcher = request.getRequestDispatcher("productdetails.jsp");
         dispatcher.forward(request, response);

@@ -4,7 +4,6 @@
     Author     : ASUS
 --%>
 
-<%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="Model.Product"%>
@@ -56,16 +55,6 @@
     </head>
 
     <body>
-           <%
-            String customerID = null;
-            Account user = ((Account) session.getAttribute("userlogin"));
-            if(user!=null){
-                if (!(user.getRoleid().getName().equals("manager")) || !(user.getRoleid().getName().equals("staff"))) {
-                 customerID = String.valueOf(user.getId());
-                }
-            }
-            
-        %>
         <!-- Topbar Start -->
         <div class="container-fluid">
             <div class="row bg-secondary py-1 px-xl-5">
@@ -89,35 +78,8 @@
 
 
                        
-<c:if test="${empty userlogin}">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Tài Khoản Của Tôi</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" onclick="location.href = 'UserServlet?action=showLoginForm';" type="button">Đăng Nhập</button>
-                                    <button class="dropdown-item" onclick="location.href = 'UserServlet?action=showSignupForm';" type="button">Đăng Ký</button>
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${not empty userlogin}">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">${userlogin.firstname}</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <button class="dropdown-item" onclick="location.href = 'UserServlet?action=profile';" type="button">Tài Khoản Của Tôi</button>
 
-                                    <c:if test="${userlogin != null && userlogin.roleid.name eq 'customer'}">
-                                        <a class="dropdown-item" href="storeRegister.jsp">Đăng Ký Cửa Hàng</a>
-                                    </c:if>
-                                    <c:if test="${userlogin != null && userlogin.roleid.name eq 'manager'}">
-                                        <a class="dropdown-item" href="StoreHomeServlet">Cửa Hàng Của Tôi</a>
-                                    </c:if>
-                              <li><a class="app-nav__item" href="Logout"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
-                </li>
-                                </div>
-                            </div>
-                        </c:if>
-
-                   
                         <div class="btn-group mx-2">
                             <!--                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">USD</button>
                                                         <div class="dropdown-menu dropdown-menu-right">
@@ -150,8 +112,8 @@
             <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
                 <div class="col-lg-4">
                     <a href="ShowProductsServlet" class="text-decoration-none">
-                        <span class="h1 text-uppercase text-primary bg-dark px-2">Lồng</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">ChimVN</span>
+                        <span class="h1 text-uppercase text-primary bg-dark px-2">Bird</span>
+                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Trading</span>
                     </a>
                 </div>
                 <div class="col-lg-4 col-6 text-left">
@@ -164,7 +126,9 @@
                             <input type="text" class="form-control" name="productName" placeholder="Tìm Sản Phẩm"> 
 
                             <div class="input-group-append">
-                                <input  class="input-group-text bg-transparent text-primary" required="" type="submit" value="Tìm Kiếm">
+
+                                <input  class="input-group-text bg-transparent text-primary" type="submit" value="Tìm Kiếm">
+
                             </div>
                         </div>
                     </form>
@@ -190,83 +154,96 @@
                     </a>
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
-
                             <div class="nav-item dropdown dropright">
-                             <a href="ProductSearchServlet?action=searchByName&search=Chim" 
-                             class="nav-link dropdown-toggle" data-toggle="dropdown">Theo loại chim<i class="fa fa-angle-right float-right mt-1"></i></a>
-                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                 <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByCategory"> 
-                                        <button type="submit" name="categoryName" value="Lồng chim vành khuyên" class="dropdown-item">Lồng chim vành khuyên</button>
+
+
+                                <a href="ProductSearchServlet?action=searchByName&search=Chim" 
+                                   class="nav-link dropdown-toggle" data-toggle="dropdown">Chim<i class="fa fa-angle-right float-right mt-1"></i></a>
+
+                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Chim chào mào" class="dropdown-item">Chim chào mào</button>
                                     </form>
-                                 <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByCategory"> <!-- Thêm hidden input để truyền giá trị action -->
-                                        <button type="submit" name="categoryName" value="Lông chim chào mào" class="dropdown-item">Lồng chim chào mào</button>
+
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> <!-- Thêm hidden input để truyền giá trị action -->
+                                        <button type="submit" name="productName" value="Chim sáo" class="dropdown-item">Chim sáo</button>
                                     </form>
-                             </div>
+
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> <!-- Thêm hidden input để truyền giá trị action -->
+                                        <button type="submit" name="productName" value="Vẹt" class="dropdown-item">Vẹt</button>
+                                    </form>
+                                </div>
                             </div>
                             <div class="nav-item dropdown dropright">
-                                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Theo chất liệu<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                  <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                      <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> <!-- Thêm hidden input để truyền giá trị action -->
-                                        <button type="submit" name="materialName" value="Tre" class="dropdown-item">Tre</button>
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Thức ăn<i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+
+
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> <!-- Thêm hidden input để truyền giá trị action -->
+                                        <button type="submit" name="productName" value="Chim non" class="dropdown-item">Chim non</button>
                                     </form>
 
 
                                     <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Gỗ mun" class="dropdown-item">Gỗ mun</button>
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Chim non" class="dropdown-item">Chim trưởng thành</button>
                                     </form>
-                                      
-                                    <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="kim loại" class="dropdown-item">kim loại</button>
-                                    </form>
-                                      
-                                    <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Tre và gỗ mun" class="dropdown-item">Tre và gỗ mun</button>
-                                    </form>
-                                      
-                                      <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Sừng trâu" class="dropdown-item">Sừng trâu</button>
-                                    </form>
-                                      
-                                       <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Tre và sừng trâu" class="dropdown-item">Tre và sừng trâu</button>
-                                    </form>
-                                      
-                                         <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Trúc" class="dropdown-item">Trúc</button>
-                                    </form>
-                                  </div>
+
+                                </div>
                             </div>
                             <div class="nav-item dropdown dropright">
-                                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Giá<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                  <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                  <form action="ProductSearchServlet" method="GET">
-                                <input type="hidden" name="action" value="searchByPriceRange">
-                                <label for="minPrice">Tối thiểu:</label>
-                                <input  type="number" id="minPrice" name="minPrice" onkeydown="return event.key !== '-'" step="any">
-                                <label for="maxPrice">Tối đa:</label>
-                                <input  type="number" id="maxPrice" name="maxPrice" onkeydown="return event.key !== '-'" step="any">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Lồng Chim<i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
 
-                                </br>    </br> <input type="submit" value="Áp dụng" <button type="submit" class="apply-button"></button>                        
-                                <!--<input type="submit" value="Search by Name">-->
-                            </form>   
-                           </div>
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Lồng tre" class="dropdown-item">Lồng tre</button>
+                                    </form>
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Lồng gỗ" class="dropdown-item">Lồng gỗ</button>
+                                    </form>
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Lồng inox" class="dropdown-item">Lồng inox</button>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                            <div class="nav-item dropdown dropright">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Phụ kiện<i class="fa fa-angle-right float-right mt-1"></i></a>
+                                <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Còi" class="dropdown-item">Còi</button>
+                                    </form>
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Găng tay" class="dropdown-item">Găng tay</button>
+                                    </form>
+                                    <form action="ProductSearchServlet" method="GET">
+                                        <input type="hidden" name="action" value="searchByName"> 
+                                        <button type="submit" name="productName" value="Hũ dựng thức ăn" class="dropdown-item">Hũ dựng thức ăn</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                            <!--<a href="" class="nav-item nav-link">Thêm sau</a>-->
                         </div>
                     </nav>
                 </div>
                 <div class="col-lg-9">
                     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                         <a href="" class="text-decoration-none d-block d-lg-none">
-                            <span class="h1 text-uppercase text-dark bg-light px-2">Lồng</span>
-                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">ChimVN</span>
+                            <span class="h1 text-uppercase text-dark bg-light px-2">Bird</span>
+                            <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">Trading</span>
                         </a>
                         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                             <span class="navbar-toggler-icon"></span>
@@ -274,17 +251,10 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
-                                <a href="ViewProfileShop" class="nav-item nav-link">Liên lạc</a>
-                                <a href="CreateRequest" class="nav-item nav-link">Đặt lồng chim</a>
-                                <%
-                                    if(customerID!=null){
-                                        %>
-                                <a href="ViewMyRequest?customerID=<%= customerID %>" class="nav-item nav-link">Đơn đặt hàng của tôi </a>
-                                <%
-                                    }
-                                %>
-                                
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird" class="nav-item nav-link">Loài chim</a>
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Thức ăn cho chim</a>
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Bird cage" class="nav-item nav-link">Lồng chim</a>
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory" class="nav-item nav-link">Phụ kiện</a>
                                 <!--                                <div class="nav-item dropdown">
                                                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
                                                                     <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">

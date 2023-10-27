@@ -82,11 +82,9 @@ public class UpdateAccount extends HttpServlet {
         String address = request.getParameter("address");
         String gender = request.getParameter("gender");
         String password = request.getParameter("password");
-        String image = request.getParameter("image");
-        String role = request.getParameter("role"); 
-        String phone = request.getParameter("phone");
+        String role = request.getParameter("role");
         UserDAO dao = new UserDAO();
-        dao.UpdateStaff(id, firstname, lastname, email, birthday, address, gender, password, role,phone,image);
+        dao.UpdateStaff(id, firstname, lastname, email, birthday, address, gender, password, role);
         response.sendRedirect("ManagerAllAccount");
         
     }

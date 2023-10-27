@@ -46,10 +46,7 @@ public class ListUserbyID extends HttpServlet {
             String[] array = new String[list.size()];
              array = list.toArray(array);
             String currentemail = e.getEmail();
-            List<String> listt = dao.getPhone();
-            String[] arrayy = new String[listt.size()];
-            arrayy = listt.toArray(arrayy);
-             String currentphone = e.getPhone();            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. You may use following sample code. */
             out.print("<form action=\"updateuser\" method=\"POST\" id=\"updateusers\" onsubmit=\"return validateForm()\">\n"
                     + "  <div class=\"row\">\n"
                     + "    <div class=\"form-group col-md-6\">\n"
@@ -89,92 +86,58 @@ public class ListUserbyID extends HttpServlet {
                     + "  <div class=\"form-group col-md-6\">\n"
                       + "<label for=\"exampleSelect1\" class=\"control-label\">Chức vụ</label>\n"
                       + "<select class=\"form-control\" name=\"role\">\n");            
-           if (e.getRoleid().getName().equalsIgnoreCase("staff")) {
+             if (e.getRoleid().getName().equalsIgnoreCase("manager")) {
+                 out.println("<option value=\"" + 2 + "\">" + "Manager" + "</option>");
                 out.println("<option value=\"" + 3 + "\">" + "staff" + "</option>");
-             
-             }
-             out.println("      </select>\n");
+                out.println("<option value=\"" + 1 + "\">" + "admin" + "</option>");
+             } else if (e.getRoleid().getName().equalsIgnoreCase("staff")) {
+                out.println("<option value=\"" + 3 + "\">" + "staff" + "</option>");
+                out.println("<option value=\"" + 2 + "\">" + "manager" + "</option>");
+                out.println("<option value=\"" + 1 + "\">" + "admin" + "</option>");
+             }else {
+                out.println("<option value=\"" + 1 + "\">" + "admin" + "</option>");
+                out.println("<option value=\"" + 2 + "\">" + "manager" + "</option>");
+                out.println("<option value=\"" + 3 + "\">" + "staff" + "</option>");
+            }
+            out.println("      </select>\n");
              out.println("    </div>\n"
              + "    <div class=\"form-group col-md-6\">\n"
              + "      <label class=\"control-label\">Email</label>\n"
              + "      <input class=\"form-control\" type=\"text\" name=\"email\" id=\"email\" value=\"" + e.getEmail()+ "\" >\n"
-             + "      <span id=\"emailError\" class=\"error\"></span>"
+             + "      <span id=\"usernameError\" class=\"error\"></span>"
              + "    </div>\n"
              + "    <div class=\"form-group col-md-6\">\n"
              + "      <label class=\"control-label\">Password </label>\n"
              + "      <input  class=\"form-control\" type=\"text\" name=\"password\" value=\"" + e.getPassword()+ "\" >\n"
              + "    </div>\n"
-             + "    <div class=\"form-group col-md-6\">\n"
-             + "      <label class=\"control-label\">số điện thoại</label>\n"
-             + "      <input  class=\"form-control\" type=\"text\" name=\"phone\" id=\"phone\" value=\"" + e.getPhone()+ "\" >\n"
-             + "      <span id=\"phoneError\" class=\"error\"></span>"   
-             + "    <div class=\"form-group col-md-6\">\n"
-             + "      <label class=\"control-label\"></label>\n"
-            + "     <img  name=\"image\" src=\"" + e.getImage()+ "\" id=\"avatarPreview\" alt=\"User cc\" width=\"100px\">"
-             +"     <input type=\"file\" name=\"image\" id=\"newAvatar\" onchange=\"previewImage(this) ;\">"
-             + "    </div>\n"    
              + "  </div>\n");
-      out.print("<script>\n" +
-"function previewImage(input) {\n" +
-"    var avatarPreview = document.getElementById('avatarPreview');\n" +
-"    if (input.files && input.files[0]) {\n" +
-"        var reader = new FileReader();\n" +
-"        reader.onload = function (e) {\n" +
-"            avatarPreview.src = e.target.result;\n" +
-"        };\n" +
-"        reader.readAsDataURL(input.files[0]);\n" +
-"    }\n" +
-"}\n" +
-"</script>"); 
              
-out.print("<button class=\"btn btn-save\" type=\"submit\">save</button>\n"
-        + "  <a class=\"btn btn-cancel\" data-dismiss=\"modal\" href=\"#\">Hủy bỏ</a>\n"
-        + "  <br>\n"
-        + "</form>\n"
-        + "<script>\n"
-        + "   var currentemail = \"" + currentemail + "\";\n"
-        + "   var currentphone = \"" + currentphone + "\";\n"
-        + "   var emailArray = " + Arrays.toString(array).replace("[", "['").replace(", ", "', '").replace("]", "']") + ";\n"
-        + "   var phoneArray = " + Arrays.toString(arrayy).replace("[", "['").replace(", ", "', '").replace("]", "']") + ";\n"
-        + "   function validateForm() {\n"
-        + "       var email = document.getElementById('email').value;\n"
-        + "       var phone = document.getElementById('phone').value;\n"
-        + "       var emailErrorElement = document.getElementById('emailError');\n"
-        + "       var phoneErrorElement = document.getElementById('phoneError');\n"
-        + "       var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail.com$/; // Gmail email pattern\n"
-        + "       var phonePattern = /^\\d{10,11}$/; // Phone number should have between 10 and 11 digits\n"
-        + "       if (email === currentemail && phone === currentphone) {\n"
-        + "           return true; // No change in email and phone, allow form submission\n"
-        + "       }\n"
-        + "       if (!emailPattern.test(email)) {\n"
-        + "           emailErrorElement.innerHTML = 'Invalid Gmail email address.';\n"
-        + "           emailErrorElement.style.color = 'red'; // Set the color to red\n"
-        + "           return false; // Email is invalid, prevent form submission\n"
-        + "       }\n"
-        + "       if (emailArray.includes(email)) {\n"
-        + "           emailErrorElement.innerHTML = 'Email already exists.';\n"
-        + "           emailErrorElement.style.color = 'red'; // Set the color to red\n"
-        + "           return false; // Email is a duplicate, prevent form submission\n"
-        + "       } else {\n"
-        + "           emailErrorElement.innerHTML = ''; // Clear the error message if no duplicate email\n"
-        + "       }\n"
-        + "       if (!phonePattern.test(phone)) {\n"
-        + "           phoneErrorElement.innerHTML = 'Phone number should have between 10 and 11 digits.';\n"
-        + "           phoneErrorElement.style.color = 'red'; // Set the color to red\n"
-        + "           return false; // Phone number is too short or too long, prevent form submission\n"
-        + "       }\n"
-        + "       if (phoneArray.includes(phone)) {\n"
-        + "           phoneErrorElement.innerHTML = 'Phone already exists.';\n"
-        + "           phoneErrorElement.style.color = 'red'; // Set the color to red\n"
-        + "           return false; // Phone is a duplicate, prevent form submission\n"
-        + "       } else {\n"
-        + "           phoneErrorElement.innerHTML = ''; // Clear the error message if no duplicate phone\n"
-        + "       }\n"
-        + "       return true; // No duplicate email or phone and valid Gmail format, allow form submission\n"
-        + "   }\n"
-        + "</script>");
+           out.print("<button class=\"btn btn-save\" type=\"submit\">save</button>\n"
+                    + "  <a class=\"btn btn-cancel\" data-dismiss=\"modal\" href=\"#\">cancel</a>\n"
+                    + "  <br>\n"
+                    + "</form>\n"
+                    + "<script>\n"
+                    + "   var currentemail = \"" + currentemail + "\";\n"
+                    + "   var array = " + Arrays.toString(array).replace("[", "['").replace(", ", "', '").replace("]", "']") + ";\n"
+                    + "   function validateForm() {\n"
+                    + "       var email = document.getElementById('email').value;\n"
+                    + "       if (email === currentemail) {\n"
+                    + "           return true; // No change in email, allow form submission\n"
+                    + "       }\n"
+                    + "       for (var i = 0; i < array.length; i++) {\n"
+                    + "           if (email === array[i]) {\n"
+                    + "               document.getElementById('emailError').innerHTML = 'Tên đăng nhập đã tồn tại.';\n"
+                    + "               document.getElementById('emailError').style.color = 'red'; // Set the color to red\n"
+                    + "               return false; // EmailError is duplicate, prevent form submission\n"
+                    + "           }\n"
+                    + "       }\n"
+                    + "       document.getElementById('emailError').innerHTML = ''; // Clear the error message if no duplicate email\n"
+                    + "       return true; // No duplicate username, allow form submission\n"
+                    + "   }\n"
+                    + "</script>");
+        }
+    }
 
-        }}
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

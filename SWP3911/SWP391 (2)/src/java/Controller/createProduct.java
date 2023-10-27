@@ -90,7 +90,7 @@ public class createProduct extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
         String name = request.getParameter("productName");
-        System.out.println(name + "--------------------------------------");
+        
         String code = request.getParameter("productCode");
         String quantity = request.getParameter("productQuantity");
         String cateID = request.getParameter("productCategory");

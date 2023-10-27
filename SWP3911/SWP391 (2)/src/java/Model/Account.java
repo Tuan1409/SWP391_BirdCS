@@ -43,24 +43,6 @@ public class Account {
         this.image = image;
     }
 
-    public Account(int id, String firstname, String lastname, String password, String email, Date birthday, Role roleid, String address, boolean active, boolean gender, String image, String phone) {
-       this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.password = password;
-        this.email = email;
-        this.birthday = birthday;
-        this.roleid = roleid;
-        this.address = address;
-        this.isActive = isActive;
-        this.gender = gender;
-        this.image = image;
-        this.phone = phone;//To change body of generated methods, choose Tools | Templates.
-    }
-    public Account(String email, String phone) {
-       this.email = email; 
-       this.phone = phone;//To change body of generated methods, choose Tools | Templates.
-    }
     public String getPhone() {
         return phone;
     }

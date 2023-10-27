@@ -3,6 +3,7 @@
     Created on : Jun 8, 2023, 9:14:43 PM
     Author     : ASUS
 --%>
+<%@page import="Model.Account"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -36,6 +37,13 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
         <jsp:include page="headerUser.jsp"/>
+        <%
+            Account user = ((Account) session.getAttribute("userlogin"));
+            int userID = 0;
+            if(user!=null){
+                    userID = user.getId();
+            }else request.getRequestDispatcher("Unauthorized.jsp").forward(request, response);
+        %>
         <!-- Breadcrumb Start -->
         <div class="container-fluid">
             <div class="row px-xl-5">
@@ -62,15 +70,7 @@
                                     <img style="width: 600px; height: 400px" src="img/${product.image}" alt="Image" >                                    
                                 </c:forEach>
                             </div>
-                            <!--                            <div class="carousel-item">
-                                                            <img class="w-100 h-100" src="${product.image}" alt="Image">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img class="w-100 h-100" src="" alt="Image">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img class="w-100 h-100" src="" alt="Image">
-                                                        </div>-->
+                            
                         </div>
                         <!--                        <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
                                                     <i class="fa fa-2x fa-angle-left text-dark"></i>
@@ -83,38 +83,45 @@
 
                 <div class="col-lg-7 h-auto mb-30">
                     <table class="table table-hover table-bordered" id="sampleTable">
-                                                       
-                                                        <tbody>
-                                                            <c:forEach items="${productList}" var="i">
-                                                                <tr>
-                                                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                                                    <td>${i.name}</td>
-                                                                    <td>${i.stock}</td>
-                                                                    <c:if test="${i.stock gt 0}">
-                                                                        <td><span class="badge bg-success">Còn hàng</span></td>
-                                                                    </c:if>
-                                                                    <c:if test="${i.stock le 0}">
-                                                                        <td><span class="badge bg-danger">Hết hàng</span></td> 
-                                                                    </c:if>
-                                                                        <td>${i.price}</td>
-                                                                        <td>${i.size}</td>
-                                                                    <!--<td><fmt:formatNumber value="${i.price}" type="number"/></td>-->
-                                                                    <td>${i.category.name}</td>
-                                                                    <td><button class="btn btn-primary btn-sm trash" type="button" 
-                                                                                data-toggle="modal" data-target="#ModalUP" onclick="getData('${i.category.id}', '${i.productID}')"
+                         <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Hiện giảm giá</th>
+                                        <th>Tình trạng</th>
+                                        <th>Giá tiền</th>
+                                        <th>Hình dáng và kích cỡ</th>
+                                        <th>Danh mục</th>
+                                    </tr>
+                        </thead>                                                        
+                        <tbody>
+                                <c:forEach items="${productList}" var="i">
+                                    <tr>
+                                        <c:set var="productID" value="${i.productID}" scope="page" />
+                                        <td>${i.name}</td>
+                                        <td>${i.discount}%</td>
+                                        <c:if test="${i.stock gt 0}">
+                                            <td><span class="badge bg-success">Còn hàng</span></td>
+                                        </c:if>
+                                        <c:if test="${i.stock le 0}">
+                                            <td><span class="badge bg-danger">Hết hàng</span></td> 
+                                        </c:if>
+                                        <td>${i.price}VNĐ</td>
+                                        <td>${i.size}</td>
+                                        <td>${i.category.name}</td>
+                                        <td><button class="btn btn-primary btn-sm trash" type="button" 
+                                            data-toggle="modal" data-target="#ModalUP" onclick="getData('${i.category.id}', '${i.productID}')"
                                                                                 >
-                                                                            So sánh 
-                                                                        </button>
-                                                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                                                                data-target="#ModalUP" onclick="getData('${i.productID}')">
-                                                                            Mua hàng
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
-                                                       
-                                </table>
+                                           So sánh 
+                                            </button>
+                                            <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                                    data-target="#ModalUP" onclick="getData('${i.productID}')">
+                                            Mua hàng
+                                            </button>
+                                        </td>
+                                    </tr> 
+                                </c:forEach>
+                        </tbody>
+                    </table>
                     
 
                 </div>
@@ -151,44 +158,68 @@
                 <div class="col">
                     <div class="bg-light p-30">
                         <div class="nav nav-tabs mb-4">
-                            <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1" role="tab">Description</a>
-                            <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2" role="tab">Reviews (<c:out value="${count}" />)</a>
+                            <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2" role="tab">Reviews (${count})</a>
                         </div>
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-pane-1">
-                                <p class="mb-3"><c:out value="${product.description}" /></p>
+                        <form action="CreateComment" method="POST">
+                            <div class="">
+                                <div class="rating-container">
+                                    <div class="stars" id="star-rating">
+                                        <i class="far fa-star" data-rating="1"></i>
+                                        <i class="far fa-star" data-rating="2"></i>
+                                        <i class="far fa-star" data-rating="3"></i>
+                                        <i class="far fa-star" data-rating="4"></i>
+                                        <i class="far fa-star" data-rating="5"></i>
+                                    </div>
+                                    <input type="hidden" name="rate" id="selected-rating" value="0">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="content" placeholder="Review cho sản phẩm"> 
+                                    <input type="hidden" class="form-control" name="userID" value="<%= userID%>"> 
+                                    <input type="hidden" class="form-control" name="productID" value="${productID}"> 
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary" value="Đánh giá">
+                                </div>
+
                             </div>
-                            <div class="tab-pane fade" id="tab-pane-2">
+                        </form>
+                        <div class="tab-content">
+                            <div class="" id="tab-pane-2">
                                 <div class="row">
                                     <div>
-                                        <h4 class="mb-4"><c:out value="${count}" /> review for "<c:out value="${product.productName}" />"</h4><c:set var="displayedUserIds" value="${sessionScope.displayedUserIds}" />
                                         <c:forEach var="feedback" items="${feedbacks}">
                                             <div class="media mb-4">
-                                                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                                <img src="${feedback.account.image}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                                 <div class="media-body">
                                                     <c:set var="isFirst" value="true" />
-                                                    <c:forEach var="user" items="${users}">
-                                                        <c:if test="${user.userId == feedback.userId}">
-                                                            <c:if test="${isFirst}">
-                                                                <h6><c:out value="${user.username}" /><small> - <i><c:out value="${feedback.timestamp}" /></i></small></h6>
+                                                    <%--<c:forEach var="user" items="${users}">--%>
+                                                        <%--<c:if test="${user.userId == feedback.userId}">--%>
+                                                            <%--<c:if test="${isFirst}">--%>
+                                                                <h6><c:out value="${feedback.account.firstname}" /><small> - <i><c:out value="${feedback.commentDate}" /></i></small></h6>
                                                                 <c:set var="isFirst" value="false" />
-                                                            </c:if>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                            <%--</c:if>--%>
+                                                        <%--</c:if>--%>
+                                                    <%--</c:forEach>--%>
                                                     <div class="text-primary mb-2">
                                                         <!-- Hiển thị đánh giá dưới dạng các ngôi sao -->
-                                                        <c:forEach var="i" begin="1" end="${feedback.rating}">
+                                                        <c:forEach var="i" begin="1" end="${feedback.rate}">
                                                             <i class="fas fa-star"></i>
                                                         </c:forEach>
-                                                        <c:if test="${feedback.rating % 1 != 0}">
+                                                        <c:if test="${feedback.rate % 1 != 0}">
                                                             <i class="fas fa-star-half-alt"></i>
                                                         </c:if>
-                                                        <c:forEach var="i" begin="${Math.ceil(feedback.rating)+1}" end="5">
+                                                        <c:forEach var="i" begin="${Math.ceil(feedback.rate)+1}" end="5">
                                                             <i class="far fa-star"></i>
                                                         </c:forEach>
                                                     </div>
-                                                    <p><c:out value="${feedback.comment}" /></p>
+                                                    <p><c:out value="${feedback.content}" /></p>
                                                 </div>
+                                                <h3>${sessionScope.userlogin.roleid.name}</h3>
+                                                    <c:if test="${sessionScope.userlogin.roleid.name eq 'manager'}">
+                                                        <a href="HideComment?commentID=${feedback.id}&productID=${productID}">Ẩn bình luận này</a>
+                                                    </c:if>
                                             </div>
                                         </c:forEach>
                                     </div>
@@ -208,7 +239,6 @@
 
 
 
-    </div>
     <!-- Shop Detail End -->
 
 
@@ -498,6 +528,34 @@
                                                                     return i;
                                                                 }
                                                             }
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const starsContainer = document.getElementById("star-rating");
+                const selectedRatingInput = document.getElementById("selected-rating");
+
+                starsContainer.addEventListener("click", function(e) {
+                    if (e.target.tagName === "I") {
+                        const selectedRating = parseInt(e.target.getAttribute("data-rating"));
+                        highlightStars(selectedRating);
+                        selectedRatingInput.value = selectedRating;
+                    }
+                });
+
+                function highlightStars(rating) {
+                    const stars = starsContainer.querySelectorAll("i");
+                    stars.forEach(star => {
+                        const starRating = parseInt(star.getAttribute("data-rating"));
+                        if (starRating <= rating) {
+                            star.classList.remove("far");
+                            star.classList.add("fas");
+                        } else {
+                            star.classList.remove("fas");
+                            star.classList.add("far");
+                        }
+                    });
+                }
+            });
         </script>
         <script>
             function deleteRow(r) {

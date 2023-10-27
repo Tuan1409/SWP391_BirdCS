@@ -47,19 +47,34 @@ public class ManageRequestController extends HttpServlet {
        RequestDAO rdo = new RequestDAO();
         MaterialDAO mdo = new MaterialDAO();
         AccountDAO ado = new AccountDAO();
-        
         List<Account> accList = new ArrayList<>();
         List<Request> requestList = rdo.getAll();
         List<Material> mateList = mdo.getAll();
-        for (Request req : requestList) {
-            Account acc = ado.getAccountByID(String.valueOf(req.getUserID()));
-            accList.add(acc);
+        
+        String user = request.getParameter("user");
+        if(user.equals("manager")){
+             for (Request req : requestList) {
+                Account acc = ado.getAccountByID(String.valueOf(req.getUserID()));
+                accList.add(acc);
+            }
+            request.setAttribute("list", requestList);
+            request.setAttribute("listMaterial", mateList);
+            request.setAttribute("listAcc", accList);
+            response.setContentType("application/json");
+            request.getRequestDispatcher("managermanageRequest.jsp").forward(request, response);
+        }else{
+            for (Request req : requestList) {
+                Account acc = ado.getAccountByID(String.valueOf(req.getUserID()));
+                accList.add(acc);
+            }
+            request.setAttribute("list", requestList);
+            request.setAttribute("listMaterial", mateList);
+            request.setAttribute("listAcc", accList);
+            response.setContentType("application/json");
+            request.getRequestDispatcher("manageRequest.jsp").forward(request, response);
         }
-        request.setAttribute("list", requestList);
-       request.setAttribute("listMaterial", mateList);
-       request.setAttribute("listAcc", accList);
-        response.setContentType("application/json");
-        request.getRequestDispatcher("manageRequest.jsp").forward(request, response);
+        
+        
     }
 
     /**

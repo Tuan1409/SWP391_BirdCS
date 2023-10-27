@@ -54,16 +54,13 @@
         <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
             <div class="app-sidebar__user">
-              <a href="UserServlet?action=profile">
-            <img style="border-radius: 50%;" class="app-sidebar__user-avatar rounded" src="img/${sessionScope.userlogin.image}" width="100px" alt="User Image">
-                </a>
+                <img style=" border-radius: 50%; " class="app-sidebar__user-avatar rounded" src="img/${sessionScope.userlogin.image}" width="100px"  alt="User Image">
                 <div>
                     <p class="app-sidebar__user-name"><b></b></p>
                     <p class="app-sidebar__user-designation">
                         <font>${sessionScope.userlogin.email}</font>
                     </p>
                 </div>
-         
             </div>
 
             <hr>

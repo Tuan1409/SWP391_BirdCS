@@ -48,7 +48,7 @@ public class CreateStaff extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             RoleDAO dao = new RoleDAO();
-            List<Role> list = dao.getStaff();
+            List<Role> list = dao.getAll();
             request.setAttribute("list", list);
             request.getRequestDispatcher("createstaff.jsp").forward(request, response);
         }

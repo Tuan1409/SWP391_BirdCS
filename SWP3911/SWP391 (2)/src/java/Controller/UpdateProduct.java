@@ -69,12 +69,16 @@ public class UpdateProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
         String id = request.getParameter("masp");
         String name = request.getParameter("tensp");
+        System.out.println(name + "--------------------------------------");
         String size = request.getParameter("sizesp");
         String giasp = request.getParameter("giasp");
         String discountsp = request.getParameter("discountsp");
         String categorysp = request.getParameter("categorysp");
+        String material = request.getParameter("materialsp");
         String quantity = request.getParameter("quantity");
         int isAvailable = 0;
         if(Integer.parseInt(quantity) > 0){
@@ -85,7 +89,7 @@ public class UpdateProduct extends HttpServlet {
             quantity = "0";
         }
         ProductDAO pdo = new ProductDAO();
-        pdo.updateSP(id, size, name, giasp, discountsp, categorysp,quantity, isAvailable);
+        pdo.updateSP(id, size, name, giasp, discountsp, categorysp,quantity, isAvailable, material);
         response.sendRedirect("ManagerProductController");
     }
 

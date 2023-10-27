@@ -83,10 +83,8 @@ public class UpdateUser extends HttpServlet {
         String gender = request.getParameter("gender");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
-         String phone = request.getParameter("phone");
-          String image = request.getParameter("image");
         UserDAO dao = new UserDAO();
-        dao.UpdateStaff(id, firstname, lastname, email, birthday, address, gender, password, role,phone,image);
+        dao.UpdateStaff(id, firstname, lastname, email, birthday, address, gender, password, role);
         response.sendRedirect("ManagerStaffController");
         
     }

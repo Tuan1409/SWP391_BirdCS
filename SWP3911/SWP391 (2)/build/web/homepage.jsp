@@ -166,75 +166,14 @@
                         <div class="navbar-nav w-100">
 
                             <div class="nav-item dropdown dropright">
-                             <a href="ProductSearchServlet?action=searchByName&search=Chim" 
-                             class="nav-link dropdown-toggle" data-toggle="dropdown">Theo loại chim<i class="fa fa-angle-right float-right mt-1"></i></a>
-                             <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                 <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByCategory"> 
-                                        <button type="submit" name="categoryName" value="Lồng chim vành khuyên" class="dropdown-item">Lồng chim vành khuyên</button>
-                                    </form>
-                                 <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByCategory"> <!-- Thêm hidden input để truyền giá trị action -->
-                                        <button type="submit" name="categoryName" value="Lông chim chào mào" class="dropdown-item">Lồng chim chào mào</button>
-                                    </form>
-                             </div>
+                                <c:forEach items="${list}" var="i">
+                                        
+                                        
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">${i.name}<i class="fa fa-angle-right float-right mt-1"></i></a>
+                                    
+                                </c:forEach>
                             </div>
-                            <div class="nav-item dropdown dropright">
-                                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Theo chất liệu<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                  <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
-                                      <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> <!-- Thêm hidden input để truyền giá trị action -->
-                                        <button type="submit" name="materialName" value="Tre" class="dropdown-item">Tre</button>
-                                    </form>
-
-
-                                    <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Gỗ mun" class="dropdown-item">Gỗ mun</button>
-                                    </form>
-                                      
-                                    <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="kim loại" class="dropdown-item">kim loại</button>
-                                    </form>
-                                      
-                                    <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Tre và gỗ mun" class="dropdown-item">Tre và gỗ mun</button>
-                                    </form>
-                                      
-                                      <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Sừng trâu" class="dropdown-item">Sừng trâu</button>
-                                    </form>
-                                      
-                                       <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Tre và sừng trâu" class="dropdown-item">Tre và sừng trâu</button>
-                                    </form>
-                                      
-                                         <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByMeterial"> 
-                                        <button type="submit" name="materialName" value="Trúc" class="dropdown-item">Trúc</button>
-                                    </form>
-                                  </div>
-                            </div>
-                            <div class="nav-item dropdown dropright">
-                                  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Giá<i class="fa fa-angle-right float-right mt-1"></i></a>
-                                  <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                             
-                                        <form action="ProductSearchServlet" method="GET">
-                                <input type="hidden" name="action" value="searchByPriceRange">
-                                <label for="minPrice">Tối thiểu:</label>
-                                <input  type="number" id="minPrice" name="minPrice" onkeydown="return event.key !== '-'" step="any">
-                                <label for="maxPrice">Tối đa:</label>
-                                <input  type="number" id="maxPrice" name="maxPrice" onkeydown="return event.key !== '-'" step="any">
-
-                                </br>    </br> <input type="submit" value="Áp dụng" <button type="submit" class="apply-button"></button>                        
-                                <!--<input type="submit" value="Search by Name">-->
-                            </form> 
-                                          
-                           </div>
                         </div>
                     </nav>
                 </div>
@@ -250,8 +189,8 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homePage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
-                                <a href="viewprofileshop.jsp" class="nav-item nav-link">Liên lạc</a>
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng" class="nav-item nav-link">Giới thiệu</a>
+                                <a href="ProductSearchServlet?action=searchByCategory&categoryName=Food" class="nav-item nav-link">Liên hệ</a>
                                 <a href="CreateRequest" class="nav-item nav-link">Đặt lồng chim</a>
                                 <%
                                     if(customerID!=null){
@@ -270,12 +209,14 @@
                                                                 </div>
                                                                 <a href="contact.html" class="nav-item nav-link">Contact</a>-->
                             </div>
-                               <div class="col-lg-4 col-6 text-left">
+
+                            <!--search store-->
+                            <div class="col-lg-4 col-6 text-left">
                                 <form action="ShopSearchServlet" method="GET">
                                     <div class="input-group">
-                                        <input type="hidden" name="action" value="searchByName">
+                                        <input type="hidden" name="action" value="searchStoreByName">
                                         <label for="storeName"></label>
-                                        <input type="text" class="form-control input-sm" name="productName" placeholder="Tìm Sản phẩm">
+                                        <input type="text" class="form-control input-sm" name="storeName" placeholder="Tìm Cửa Hàng">
 
                                         <div class="input-group-append">
                                             <input class="input-group-text bg-transparent text-primary btn-sm" type="submit" value="Tìm Kiếm">
@@ -318,10 +259,10 @@
                                 <img class="position-absolute w-100 h-100" src="img/long-chao-mao-sin-tre-gia-1.jpg" style="object-fit: cover;">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng chim phổ biến</h1>
+                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng chim sáo</h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi bán những lồng chim cảnh đẹp, độc lạ và giá cả phù hợp nhất trên thị trường.</p>
                                         <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                           href="ProductSearchServlet?action=searchByName&productName=Lồng">Mua Ngay</a>
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng">Lồng Shop</a>
 
                                     </div>
                                 </div>
@@ -334,7 +275,7 @@
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Những lồng chim đến từ những nhà cung cấp uy tín.</p>
 
                                         <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" 
-                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng chim vành khuyên">Mua Ngay</a>
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Lồng Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -342,11 +283,11 @@
                                 <img class="position-absolute w-100 h-100" src="img/long-cu-gay-duc-song-long-noi-1.jpg" style="object-fit: cover;">
                                 <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                     <div class="p-3" style="max-width: 700px;">
-                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng chim chào mào</h1>
+                                        <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Lồng Chim chào mào </h1>
                                         <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Nơi có những lồng chim đẹp đầy nghệ thuật trên cả thế giới, tạo nên vè đẹp sang trọng quý tộc.</p>
 
                                         <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng Chim chào mào">Mua Ngay</a>
+                                           href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng cage">Lồng Shop</a>
                                     </div>
                                 </div>
                             </div>
@@ -357,19 +298,19 @@
                     <div class="product-offer mb-30" style="height: 200px;">
                         <img class="img-fluid" src="img/long-hoa-mi-56-60-nan-full-set-2.jpg" alt="">
                         <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Lồng gỗ mun</h6>
+                            <h6 class="text-white text-uppercase">Lồng bằng gỗ trắc</h6>
                             <h3 class="text-white mb-3"></h3>
                             <a  class="btn btn-primary"
-                                href="ProductSearchServlet?action=searchByMeterial&materialName=Gỗ mun">Mau Ngay</a>
+                                href="ProductSearchServlet?action=searchByCategory&categoryName=Food">Lồng Shop</a>
 
                         </div>
                     </div>
                     <div class="product-offer mb-30" style="height: 200px;">
                         <img class="img-fluid" src="img/long-mun-cham-hoa-mai-1.jpg" alt="">
                         <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Lồng tre</h6>
+                            <h6 class="text-white text-uppercase">Lồng bằng gỗ mít</h6>
                             <h3 class="text-white mb-3"></h3>
-                            <a class="btn btn-primary" href="ProductSearchServlet?action=searchByMeterial&materialName=Tre">Mau Ngay</a>
+                            <a class="btn btn-primary" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">Lồng Shop</a>
                         </div>
                     </div>
                 </div>
@@ -389,53 +330,53 @@
 
 
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">                                            
-                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByMeterial&materialName=kim loại">
+                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng">
                         <div class="cat-item d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                 <img class="img-fluid" src="img/long-cu-gay-duc-song-long-noi-1.jpg" alt="" style="width: 100px; height: 100px ">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Lồng kim loại</h6>
-                                <small class="text-body">100+ sản phẩm</small>
+                                <h6>Chim sáo </h6>
+                                <small class="text-body">100 Products</small>
                             </div>
                         </div>
                     </a>                                    
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByMeterial&materialName=Sừng trâu">
+                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByCategory&categoryName=Food">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                 <img class="img-fluid" src="img/long-hoa-mi-56-60-nan-full-set-2.jpg" alt="" style="width: 100px; height: 100px;">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Lồng sừng trâu</h6>
-                                <small class="text-body">100+ sản phẩm</small>
+                                <h6>Chim cu gáy</h6>
+                                <small class="text-body">100 Products</small>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByMeterial&materialName=Trúc">
+                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByCategory&categoryName=Lồng cage">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                 <img class="img-fluid" src="img/long-luc-chao-mao.jpg" alt="" style="width: 100px; height: 100px;">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Lồng Trúc</h6>
-                                <small class="text-body">100+ sản phẩm</small>
+                                <h6>Lồng đặc biệt</h6>
+                                <small class="text-body">100 Products</small>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByMeterial&materialName=Tre và sừng trâu">
+                    <a class="text-decoration-none" href="ProductSearchServlet?action=searchByCategory&categoryName=Accessory">
                         <div class="cat-item img-zoom d-flex align-items-center mb-4">
                             <div class="overflow-hidden" style="width: 100px; height: 100px;">
                                 <img class="img-fluid" src="img/long-luc-1m2.jpg" alt="" style="width: 100px; height: 100px;">
                             </div>
                             <div class="flex-fill pl-3">
-                                <h6>Lồng tre và sừng trâu</h6>
-                                <small class="text-body">100+ sản phẩm</small>
+                                <h6>Phụ kiện</h6>
+                                <small class="text-body">100 Products</small>
                             </div>
                         </div>
                     </a>
@@ -480,7 +421,7 @@
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mb-1">
 
-                          
+                                        <small>Số Lượng: ${product.quantitySold}</small>
                                     </div>
                                 </div>
                             </div>

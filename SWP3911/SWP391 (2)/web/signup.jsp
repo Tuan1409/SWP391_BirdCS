@@ -254,7 +254,7 @@
                 }
             }
         </style>
-     </head>
+    </head>
     <body>
         <header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -264,7 +264,7 @@
                 </a>
             </nav>
         </header>
-       <div class="auth-wrapper">
+        <div class="auth-wrapper">
             <div class="auth-container row">
                 <div class="auth-action-left col-3">
                     <div class="auth-form-outer">
@@ -273,7 +273,7 @@
                         </h1><br>
                         <form class="signup-form" action="UserServlet?action=signup" method="POST">
                             <c:set var="errors" value="${requestScope.CREATE_ERROR}"/>
-                            <input class="auth-form-input" type="text" id="firstname" name="firstname" value="${param.firstname}" placeholder="Nhập tên đầu"><br>
+                            <input class="auth-form-input" type="text" id="fullname" name="firstname" value="${param.firstname}" placeholder="Nhập tên đầu"><br>
                             <c:if test="${not empty errors.fullnameBlankError}">
                                 <p class="error-message">
                                     ${errors.fullnameBlankError}
@@ -285,7 +285,8 @@
                                     ${errors.fullnameBlankError}
                                 </p>
                             </c:if>
-                              <input class="auth-form-input" type="text" value="${param.email}" id="email" name="email" placeholder="Nhập Email"><br>
+                            
+                            <input class="auth-form-input" type="text" value="${param.email}" id="email" name="email" placeholder="Nhập Email"><br>
                             <c:if test="${not empty errors.emailIsExisted}">
                                 <p class="error-message">
                                     ${errors.emailIsExisted}
@@ -301,7 +302,7 @@
                                     ${errors.emailFormatError}
                                 </p>
                             </c:if>
-                             <div class="input-icon">
+                                <div class="input-icon">
                                 <input class="auth-form-input" type="password" name="password" id="password" placeholder="Nhập mật khẩu"/>
                                 <i class="fa fa-eye show-password"></i>
                             </div>
@@ -310,16 +311,17 @@
                                     ${errors.passwordBlankError}
                                 </p>
                             </c:if>
+                                <div class="input-icon">
+                                
                             <input class="auth-form-input" type="date" value="${param.birthday}" id="birthday" name="birthday" placeholder="Nhập ngày sinh"><br>
                             <input class="auth-form-input" type="text" value="${param.address}" id="address" name="address" placeholder="Nhập địa chỉ"><br>
-                            
+                            <input class="auth-form-input" type="text" value="${param.phone}" id="phone" name="phone" placeholder="Nhập số điện thoại"><br>
                            <label class="auth-form-input" for="exampleSelect1"  placeholder="Nhập giới tính"></label>
-                                    <select class="form-control" id="gender" value="${param.gender}" name="gender" required>
+                                    <select class="form-control" id="exampleSelect1" name="gender" required>
                                         <option disabled >-- Chọn giới tính --</option>
                                         <option value="true">Nam</option>
                                         <option value="false">Nữ</option>
                                     </select>
-                           <input class="auth-form-input" type="text" value="${param.phone}" id="phone" name="phone" placeholder="Nhập số điện thoại"><br>
                             <c:if test="${not empty errors.phoneFormatError}">
                                 <p class="error-message">
                                     ${errors.phoneFormatError}
@@ -335,9 +337,8 @@
                                     ${errors.phoneBlankError}
                                 </p>
                             </c:if>
-                                   
-                          
-                          <div class="footer-action">
+                                
+                            <div class="footer-action">
                                 <input type="submit" value="Tạo tài khoản" class="auth-submit"/>
                             </div>
                             <p>Đã có tài khoản? <a href="UserServlet?action=showLoginForm">Quay lại trang đăng nhập</a></p>
@@ -357,78 +358,3 @@
 </body>
 </html>
 
-
-
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        

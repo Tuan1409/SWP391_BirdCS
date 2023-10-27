@@ -6,7 +6,6 @@
 package Controller;
 
 
-import Dao.AccountDAO;
 import Dao.UserDAO;
 import Model.Account;
 import java.io.IOException;
@@ -83,9 +82,6 @@ public class UserServlet extends HttpServlet {
                 
                 case "signup":
                     createUser(request, response);
-                    break;
-                 case "profile":
-                    userProfile(request, response);
                     break;
             }
         } catch (SQLException e) {
@@ -193,7 +189,7 @@ public class UserServlet extends HttpServlet {
                 request.setAttribute("CREATE_ERROR", errors);
             } else {
                
-                 Account loginUser = userDAO.checkLogin(email,password);
+                Account loginUser = userDAO.checkLogin(email,password);
                 if (loginUser != null) {
                     String  name = loginUser.getRoleid().getName();
                     session.setAttribute("userlogin", loginUser);
@@ -237,8 +233,8 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("signup.jsp").forward(request, response);
     }
 
-     private void createUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
-          String url = "signup.jsp";
+    private void createUser(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, ServletException, IOException {
+        String url = "signup.jsp";
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
@@ -251,17 +247,16 @@ public class UserServlet extends HttpServlet {
             String filename = request.getParameter("filename");
       UserDAO dao = new UserDAO();
         boolean foundError = false;
-         boolean foundErrorr = false;
         CreateError errors = new CreateError();
         ArrayList<Account> list = userDAO.getAllUsers();
         try {
             if (firstname.trim().equals("")) {
                 foundError = true;
-                errors.setFullnameBlankError("Không được để trống.");
+                errors.setFullnameBlankError("Họ và tên  không được để trống.");
             }
             if (lastname.trim().equals("")) {
                 foundError = true;
-                errors.setFullnameBlankError("Không được để trống.");
+                errors.setFullnameBlankError("Họ và tên  không được để trống.");
             }
              if (password.trim().equals("")) {
                 foundError = true;
@@ -282,29 +277,28 @@ public class UserServlet extends HttpServlet {
                 if (a.getEmail().equals(email)) {
                     foundError = true;
                     errors.setEmailIsExisted("Email đã được đăng kí.");
+                    
                 }
+                 
                 if (a.getPhone().equals(phone)) {
                     foundError = true;
                     errors.setPhoneNumberIsExisted("Số điện thoại đã được đăng kí.");
-               }
-                 
-            }
-            if (foundError) {
-                     request.setAttribute("CREATE_ERROR", errors);
                 }
-            else{
+               
+            }
+            if (foundError =true) {
+                request.setAttribute("CREATE_ERROR", errors);
+              
+            } else if(foundError == false){
                 dao.insertstaff(firstname,lastname,filename, address, birthday, gender, role, email, password,phone);
                  url = "UserServlet?action=showLoginForm";
             }
 
         }finally {
-             RequestDispatcher rd = request.getRequestDispatcher(url);
+            RequestDispatcher rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
          }
         
-
-//To change body of generated methods, choose Tools | Templates.
-    
 
 //To change body of generated methods, choose Tools | Templates.
     }
@@ -314,20 +308,6 @@ public class UserServlet extends HttpServlet {
     } private boolean isValidPhoneNumber(String phoneNumber) {
         String phoneRegex = "^[0-9]{10}$";
         return phoneNumber.matches(phoneRegex);
-    }
-
-    private void userProfile(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       HttpSession session = request.getSession();
-        Account dto = (Account) session.getAttribute("userlogin");
-        Account user = null;
-        if (dto != null) {
-            int Id = dto.getId();
-            AccountDAO userDAO = new AccountDAO();
-            user = userDAO.getAccount(Id);
-            request.setAttribute("user", user);
-              request.getRequestDispatcher("profile.jsp").forward(request, response);
-            
-        }
     }
 
 }

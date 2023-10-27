@@ -170,14 +170,14 @@
                                   <div class="form-group col-md-3">
                                     <label for="exampleSelect1" class="control-label">Giới tính</label>
                                     <select class="form-control" id="exampleSelect1" name="gender" required>
-                                        <option disabled >-- Giới tính --</option>
+                                        <option disabled >-- Choose gender --</option>
                                         <option value="true">Nam</option>
                                         <option value="false">Nữ</option>
                                     </select>
                                 </div>
                                  
                                  <div class="form-group col-md-3">
-                                    <label for="exampleSelect1" class="control-label">Chức vụ</label>
+                                    <label for="exampleSelect1" class="control-label">Role</label>
                                     <select class="form-control" id="exampleSelect1" name="role" required>
                                         <option disabled >-- Chọn chức vụ --</option>
                                          <c:forEach items="${requestScope.list}" var="user">
