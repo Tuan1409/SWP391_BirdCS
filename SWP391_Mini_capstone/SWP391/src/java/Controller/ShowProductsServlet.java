@@ -5,7 +5,9 @@
  */
 package Controller;
 
+import Dao.CategoryDAO;
 import Dao.ProductDAO;
+import Model.Category;
 import Model.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,6 +42,9 @@ public class ShowProductsServlet extends HttpServlet {
         try ( PrintWriter out = response.getWriter()){
             /* TODO output your page here. You may use following sample code. */
             ProductDAO dao = new ProductDAO();
+                    CategoryDAO cdo = new CategoryDAO();
+            List<Category> categoryList = cdo.getAll();
+        request.setAttribute("list", categoryList);
             List<Product> productList = dao.getAll();
              HttpSession session = request.getSession();
             session.setAttribute("products", productList);
@@ -68,6 +73,9 @@ public class ShowProductsServlet extends HttpServlet {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(ShowProductsServlet.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+CategoryDAO cdo = new CategoryDAO();
+            List<Category> categoryList = cdo.getAll();
+        request.setAttribute("list", categoryList);
             ProductDAO dao = new ProductDAO();
             List<Product> productList = dao.getAll();
              HttpSession session = request.getSession();

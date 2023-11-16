@@ -39,10 +39,12 @@
         <%
             Account user = ((Account) session.getAttribute("userlogin"));
             int staffID = 0;
+            String staffName = "";
             if (!(user.getRoleid().getName().equals("staff"))) {
                 request.getRequestDispatcher("Unauthorized.jsp").forward(request, response);
             } else {
                 staffID = user.getId();
+                staffName = user.getFirstname();
             }
 
             String[] status = {"Đang chờ xét duyệt", "Đã xét duyệt", "Khách hàng đã xác nhận đơn hàng", "Đã từ chối"};
@@ -133,6 +135,7 @@
                                                         <form style="width: 35px" action="UpdateRequest" method="post">
                                                             <input type="hidden" name="ID" value="${i.id}">
                                                             <input type="hidden" name="staffID" value="<%= staffID%>">
+                                                            <input type="hidden" name="staffName" value="<%= staffName%>">
                                                             <input type="hidden" name="name" value="${i.name}">
                                                             <input type="hidden" name="quantity" value="${i.quantity}">
                                                             <input type="hidden" name="price" value="${i.price}">

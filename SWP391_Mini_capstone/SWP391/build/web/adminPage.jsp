@@ -77,10 +77,10 @@
                                 <li><a class="app-menu__item " href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
                                             class="app-menu__label">Quản lý khách hàng</span></a></li>-->
                 <li><a class="app-menu__item" href="ManagerAllAccount"><i
-                            class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quản lý tài khoản công ty</span></a>
+                            class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quản lý công ty</span></a>
                 </li>
                 <li><a class="app-menu__item" href="ManagerCustomerAccount"><i
-                            class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quản lý tài khoản người dùng</span></a>
+                            class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quản lý khách hàng</span></a>
                 </li>
                 
                

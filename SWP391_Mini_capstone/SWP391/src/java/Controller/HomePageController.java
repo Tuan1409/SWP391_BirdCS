@@ -37,8 +37,8 @@ public class HomePageController extends HttpServlet {
         CategoryDAO cdo = new CategoryDAO();
         List<Category> categoryList = cdo.getAll();
         request.setAttribute("list", categoryList);
-       
-        response.setContentType("application/json");
+        System.out.println(categoryList + "HomePageController");
+        response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("homepage.jsp").forward(request, response);
     } 
 

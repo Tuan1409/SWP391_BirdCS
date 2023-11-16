@@ -267,7 +267,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homepage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
+                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Tất cả lồng chim</a>
                                 <a href="viewprofileshop.jsp" class="nav-item nav-link">Liên lạc</a>
                                 <a href="CreateRequest?customerID=<%= customerID%>" class="nav-item nav-link">Đặt lồng chim</a>
                                 <!--
@@ -291,15 +291,15 @@
                             </div>
 
                             <!--search store-->
-                            <div class="col-lg-4 col-6 text-left">
-                                <form action="ShopSearchServlet" method="GET">
+                           <div class="col-lg-4 col-6 text-left">
+                                <form action="ProductSearchServlet" method="GET">
                                     <div class="input-group">
-                                        <input type="hidden" name="action" value="searchStoreByName">
-                                        <label for="storeName"></label>
-                                        <input type="text" class="form-control input-sm" name="storeName" placeholder="Tìm Cửa Hàng">
+                                        <input type="hidden" name="action" value="searchByName">
+                                        <label for="productName"></label>
+                                        <input type="text" class="form-control" name="productName" placeholder="Tìm Sản Phẩm"> 
 
                                         <div class="input-group-append">
-                                            <input class="input-group-text bg-transparent text-primary btn-sm" type="submit" value="Tìm Kiếm">
+                                            <input  class="input-group-text bg-transparent text-primary" required="" type="submit" value="Tìm Kiếm">
                                         </div>
                                     </div>
                                 </form>

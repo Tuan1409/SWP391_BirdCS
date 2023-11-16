@@ -522,7 +522,56 @@ public class UserDAO {
     }
     
     }
-
+     public void createuser(String firstname, String lastname, String image, String address, String birthday, String gender, String role, String email, String password,String phone) throws ClassNotFoundException {
+      String sql = "INSERT INTO Account"
+                + "(firstname,lastname, email, password, gender, birthday, RoleId, address,phone,isActive,image )\n"
+                + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ? ,'true','1.jpg')";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBContext.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ps.setString(3, email);
+            ps.setString(4, password);
+            ps.setBoolean(5, Boolean.parseBoolean(gender));
+            ps.setDate(6, Date.valueOf(birthday));
+            ps.setInt(7, Integer.parseInt(role));
+            ps.setString(8, address);
+          
+            ps.setString(9, phone);
+            ps.executeUpdate();
+            return;
+        } catch (SQLException e) {
+        } finally {
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+//To change body of generated methods, choose Tools | Templates.
+    }
+    
+    }
     public void insertuser(String firstname, String lastname, String address, String birthday, String gender,  String email, String password,String phone) throws ClassNotFoundException {
        String sql = "INSERT INTO Account"
                 + "(firstname,lastname, email, password, gender, birthday, RoleId, address,isActive,phone )\n"

@@ -111,7 +111,7 @@ public class PromotionDAO {
         return check;
     }
 
-    public void updatePromotion(int promotionID, String promotionName, Date dateStart, Date dateEnd, boolean promotionStatus, int value, int accID) {
+    public void updatePromotion(int promotionID, String promotionName, Date dateStart, Date dateEnd, boolean promotionStatus, int value, int accID, int promotionCondition) {
         Connection conn;
         PreparedStatement stmt;
         try {

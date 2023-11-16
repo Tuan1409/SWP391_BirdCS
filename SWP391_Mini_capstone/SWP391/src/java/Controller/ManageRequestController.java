@@ -65,7 +65,7 @@ public class ManageRequestController extends HttpServlet {
             request.setAttribute("list", requestList);
             request.setAttribute("listMaterial", mateList);
             request.setAttribute("listAcc", accList);
-            response.setContentType("application/json");
+             response.setContentType("text/html;charset=UTF-8");
             request.getRequestDispatcher("managermanageRequest.jsp").forward(request, response);
         }else{
             for (Request req : requestList) {
@@ -75,7 +75,7 @@ public class ManageRequestController extends HttpServlet {
             request.setAttribute("list", requestList);
             request.setAttribute("listMaterial", mateList);
             request.setAttribute("listAcc", accList);
-            response.setContentType("application/json");
+             response.setContentType("text/html;charset=UTF-8");
             request.getRequestDispatcher("manageRequest.jsp").forward(request, response);
         }
         

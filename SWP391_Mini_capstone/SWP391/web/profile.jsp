@@ -138,10 +138,10 @@ function previewImage(input) {
                 </div>
                     <div class="col-md-6">
                             <div class="ibox">
-              x    <div class="ibox-body">
+                <div class="ibox-body">
                                         <ul class="nav nav-tabs tabs-line">
                                              <li class="nav-item">
-                                                  <a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="ti-settings"></i> Hồ sơ</a>
+                                                  <a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="ti-settings"></i> </a>
                                             </li>
                                         </ul>
                                     </div>
@@ -158,7 +158,7 @@ function previewImage(input) {
                          <input name="password" type="password" value="${sessionScope.userlogin.password}" hidden="">
                            
                        <div class="form-group">
-                                                    <label>Họ</label>
+                                                    <label>Tên đệm</label>
                                                     <input name="firstname" class="form-control" readonly="" type="text" value="${sessionScope.userlogin.firstname}" placeholder="First Name">
                                                 </div>
                                                 
@@ -189,7 +189,7 @@ function previewImage(input) {
                     </div>
                 </div>
                               
-                                                <a href="changepassword.jsp">Thay đổi mật khẩu</a>
+                                                <a class="btn btn-default" href="changepassword.jsp">Thay đổi mật khẩu</a>
     </div>
 
   </form> 

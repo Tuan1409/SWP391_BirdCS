@@ -124,6 +124,11 @@
 
                                 </div>
                                 <div class="form-group  col-md-4">
+                                    <label class="control-label">Điều kiện khuyến mãi</label>
+                                    <input required="" name="promotionCondition" class="form-control" type="text" value="${promotionCondition}">
+
+                                </div>
+                                <div class="form-group  col-md-4">
                                     <label class="control-label">Ngày bắt đầu</label>
                                     <input required="" name="dateStart" class="form-control" type="date" value="${dateStart}" >
 

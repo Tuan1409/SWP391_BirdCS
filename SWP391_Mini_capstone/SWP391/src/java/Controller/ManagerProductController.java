@@ -42,6 +42,7 @@ public class ManagerProductController extends HttpServlet {
         ProductDAO pdo = new ProductDAO();
         CategoryDAO cdo = new CategoryDAO();
         List<Product> productList = pdo.getAllProducts();
+           System.out.println(productList + "ManagerProductController");
         List<Category> categoryList = cdo.getAll();
         request.setAttribute("list", productList);
         String messAddCategory = (String) request.getAttribute("messAddCategory");
@@ -67,12 +68,14 @@ public class ManagerProductController extends HttpServlet {
             throws ServletException, IOException {
        ProductDAO pdo = new ProductDAO();
         CategoryDAO cdo = new CategoryDAO();
-        List<Product> productList = pdo.getAll();
+        List<Product> productList = pdo.getAllProducts();
+           System.out.println(productList + "ManagerProductController");
         List<Category> categoryList = cdo.getAll();
         request.setAttribute("list", productList);
         String messAddCategory = (String) request.getAttribute("messAddCategory");
-        
-        request.setAttribute("messAddCategory", messAddCategory);
+        String messAddMaterial = (String) request.getAttribute("messAddMaterial");
+         request.setAttribute("messAddCategory", messAddCategory);
+        request.setAttribute("messAddMaterial", messAddMaterial);
         response.setContentType("text/html;charset=UTF-8");
         request.getRequestDispatcher("managerproduct.jsp").forward(request, response);
     }

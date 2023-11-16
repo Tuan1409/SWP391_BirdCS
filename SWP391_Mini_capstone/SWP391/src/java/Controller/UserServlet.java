@@ -318,7 +318,7 @@ public class UserServlet extends HttpServlet {
                      request.setAttribute("CREATE_ERROR", errors);
                 }
             else{
-                dao.insertstaff(firstname,lastname,filename, address, birthday, gender, role, email, password,phone);
+                dao.createuser(firstname,lastname,filename, address, birthday, gender, role, email, password,phone);
                  url = "UserServlet?action=showLoginForm";
             }
 
@@ -460,12 +460,12 @@ public class UserServlet extends HttpServlet {
              
              }else {
                 foundError = true;
-                errors.setNotMatchPassword("Password does not match or incorrect old password");
+                errors.setNotMatchPassword("Mật khẩu không đúng");
             }
           if (foundError) {
                 request.setAttribute("EDIT_ERROR", errors);
             }else{
-                request.setAttribute("EDIT_SUCCESS", "User information updated successfully");
+                request.setAttribute("EDIT_SUCCESS", "Đã thay đổi mật khẩu thành công");
           }
           
         }catch (Exception e) {

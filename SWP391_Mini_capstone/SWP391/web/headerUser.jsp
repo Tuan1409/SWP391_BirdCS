@@ -168,18 +168,24 @@
                     <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light" id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
                         <div class="navbar-nav w-100">
 
-                            <div class="nav-item dropdown dropright">
+                             <div class="nav-item dropdown dropright">
                                 <a href="ProductSearchServlet?action=searchByName&search=Chim" 
                                    class="nav-link dropdown-toggle" data-toggle="dropdown">Theo loại chim<i class="fa fa-angle-right float-right mt-1"></i></a>
                                 <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
+                                    <c:forEach var="category" items="${list}" end="15">
+                                        <form action="ProductSearchServlet" method="GET">
+                                            <input type="hidden" name="action" value="searchByCategory"> 
+                                            <button type="submit" name="categoryName" value="${category.name}" class="dropdown-item">${category.name}</button>
+                                        </form>
+                                    </c:forEach>
                                     <form action="ProductSearchServlet" method="GET">
                                         <input type="hidden" name="action" value="searchByCategory"> 
                                         <button type="submit" name="categoryName" value="Lồng chim vành khuyên" class="dropdown-item">Lồng chim vành khuyên</button>
-                                    </form>
+                                    </form><!--
                                     <form action="ProductSearchServlet" method="GET">
-                                        <input type="hidden" name="action" value="searchByCategory"> <!-- Thêm hidden input để truyền giá trị action -->
+                                        <input type="hidden" name="action" value="searchByCategory">  Thêm hidden input để truyền giá trị action 
                                         <button type="submit" name="categoryName" value="Lông chim chào mào" class="dropdown-item">Lồng chim chào mào</button>
-                                    </form>
+                                    </form>-->
                                 </div>
                             </div>
                             <div class="nav-item dropdown dropright">
@@ -251,7 +257,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homepage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
+                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Tất cả lồng chim </a>
                                 <a href="viewprofileshop.jsp" class="nav-item nav-link">Liên lạc</a>
                                 <%                                    if (managerID == null) { //manager thì k đặt hàng
                                 %>
@@ -323,10 +329,10 @@
                                         </button>
 
                                         <c:if test="${userlogin != null && userlogin.roleid.name eq 'customer'}">
-                                            <a class="dropdown-item" href="storeRegister.jsp">Đăng Ký Cửa Hàng</a>
+<!--                                            <a class="dropdown-item" href="storeRegister.jsp">Đăng Ký Cửa Hàng</a>-->
                                         </c:if>
                                         <c:if test="${userlogin != null && userlogin.roleid.name eq 'manager'}">
-                                            <a class="dropdown-item" href="StoreHomeServlet">Cửa Hàng Của Tôi</a>
+                                            <a class="dropdown-item" href="ManagerProductController">Cửa Hàng Của Tôi</a>
                                         </c:if>
                                         <c:if test="${userlogin != null && userlogin.roleid.name eq 'customer'}">
                                             <a href="ViewMyRequest?customerID=<%= customerID%>" class="dropdown-item">Đơn đặt hàng của tôi </a>

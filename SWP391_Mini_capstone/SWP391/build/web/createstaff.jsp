@@ -252,7 +252,7 @@
 
 
         <script>
-            function validateForm() {
+        function validateForm() {
                 var firstname = document.getElementById("name").value.trim();
                 var lastname = document.getElementById("lastname").value.trim();
                 var address = document.getElementById("address").value.trim();
@@ -372,7 +372,22 @@
                     birthdayError.style.color = "";
                     document.getElementById("birthday").style.borderColor = "";
                 }
-
+                 if(phone ===""){
+                            phoneError.textContent = "Vui lòng nhập số điện thoại.";
+                            phoneError.style.color = "red";
+                            document.getElementById("phone").style.borderColor = "red";
+                            isValid = false;
+                }else if(phone.length < 10 || phone.length > 12){
+                     phoneError.textContent = "số điện thoại không đúng định dạng.";
+                            phoneError.style.color = "red";
+                            document.getElementById("phone").style.borderColor = "red";
+                            isValid = false;
+                }else{
+                       phoneError.textContent = "";
+                         phoneError.style.color = "";
+                       document.getElementById("phone").style.borderColor = "";
+                      
+                }
                 if (pass === "") {
                     passError.textContent = "Vui lòng nhập mật khẩu.";
                     passError.style.color = "red";
@@ -393,70 +408,7 @@
                     passError.style.color = "";
                     document.getElementById("pass").style.borderColor = "";
                 }
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'LoadEmail?email=' + username, true);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (username === "") {
-                            usernameError.textContent = "Vui lòng nhập tên đăng nhập.";
-                            usernameError.style.color = "red";
-                            document.getElementById("username").style.borderColor = "red";
-                            isValid = false;
-                        } else if (!username.endsWith("@gmail.com")) {
-                            usernameError.textContent = "Email phải kết thúc bằng '@gmail.com'.";
-                            usernameError.style.color = "red";
-                            document.getElementById("username").style.borderColor = "red";
-                            isValid = false;
-                        } else if (username.length < 10 || username.length > 100) {
-                            usernameError.textContent = "Địa chỉ không đúng định dạng.";
-                            usernameError.style.color = "red";
-                            document.getElementById("username").style.borderColor = "red";
-                            isValid = false;
-                        } else if (response.available) {
-                            usernameError.textContent = "";
-                            usernameError.style.color = "";
-                            document.getElementById("username").style.borderColor = "";
-                            document.getElementById("createPro").submit();
-                        } else {
-                            usernameError.textContent = "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.";
-                            usernameError.style.color = "red";
-                            document.getElementById("username").style.borderColor = "red";
-                        }
-                    }
-                };
-                xhr.send();
-
-                var xhrr = new XMLHttpRequest();
-                xhrr.open('GET', 'LoadPhone?phone=' + phone, true);
-                xhrr.onreadystatechange = function () {
-                    if (xhrr.readyState === 4 && xhrr.status === 200) {
-                        var response = JSON.parse(xhrr.responseText);
-                        if (username === "") {
-                            phoneError.textContent = "Vui lòng nhập số điện thoại.";
-                            phoneError.style.color = "red";
-                            document.getElementById("phone").style.borderColor = "red";
-                            isValid = false;
-                        } else if (phone.length > 10 || phone.length < 11) {
-                            phoneError.textContent = "Số điện thoại không đúng định dạng.";
-                            phoneError.style.color = "red";
-                            document.getElementById("phone").style.borderColor = "red";
-                            isValid = false;
-                        } else if (response.available) {
-                            phoneError.textContent = "";
-                            phoneError.style.color = "";
-                            document.getElementById("phone").style.borderColor = "";
-                            document.getElementById("createPro").submit();
-                        } else {
-                            usernameError.textContent = "số điện thoại đã tồn tại. Vui lòng chọn tên khác.";
-                            usernameError.style.color = "red";
-                            document.getElementById("phone").style.borderColor = "red";
-                        }
-                    }
-                };
-                xhrr.send();
-                if (!file) {
+                 if (!file) {
                     document.getElementById("uploadfile").classList.add("error-input");
                     imageError.textContent = "Vui lòng chọn ảnh.";
                     imageError.style.color = "red";
@@ -466,11 +418,85 @@
                     imageError.textContent = "";
                     imageError.style.color = "";
                 }
+                 if (username === "") {
+                usernameError.textContent = "Vui lòng nhập tên đăng nhập.";
+                usernameError.style.color = "red";
+                document.getElementById("username").style.borderColor = "red";
+                isValid = false;
+                }else if(!username.endsWith("@gmail.com")){
+                    usernameError.textContent = "Email phải kết thúc bằng '@gmail.com'.";
+                    usernameError.style.color = "red";
+                     document.getElementById("username").style.borderColor = "red";
+                     isValid = false;
+                 }
+                else if (username.length < 10 || username.length > 100) {
+                    usernameError.textContent = "Địa chỉ không đúng định dạng.";
+                     usernameError.style.color = "red";
+                         document.getElementById("username").style.borderColor = "red";
+                        isValid = false;
+                }else{
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'LoadEmail', true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                       var usernames = JSON.parse(xhr.responseText);
+                         if (usernames.includes(username)) {
+                            usernameError.textContent = "email đã tồn tại. Vui lòng chọn tên khác.";
+                            usernameError.style.color = "red";
+                            document.getElementById("username").style.borderColor = "";
+                             isValid = false;
+                        } else {
+                             usernameError.textContent = "";
+                             usernameError.style.color = "";
+                             document.getElementById("username").style.borderColor = "";
+                             
+                             
+                             if(isValid && firstname && lastname &&address && birthday && pass && file && phone){
+                                   document.getElementById("createPro").submit();
+                             }
 
-                if (isValid) {
-                    document.getElementById("createPro").submit();
-                }
+                        }
+                    }
+                      
+                };
+                  xhr.send();
             }
+        }
+
+//                var xhrr = new XMLHttpRequest();
+//                xhrr.open('GET', 'LoadPhone?phone=' + phone, true);
+//                xhrr.onreadystatechange = function () {
+//                    if (xhrr.readyState === 4 && xhrr.status === 200) {
+//                        var response = JSON.parse(xhrr.responseText);
+//                        if (username === "") {
+//                            phoneError.textContent = "Vui lòng nhập số điện thoại.";
+//                            phoneError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                            isValid = false;
+//                        } else if (phone.length > 10 || phone.length < 11) {
+//                            phoneError.textContent = "Số điện thoại không đúng định dạng.";
+//                            phoneError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                            isValid = false;
+//                        } else if (response.available) {
+//                            phoneError.textContent = "";
+//                            phoneError.style.color = "";
+//                            document.getElementById("phone").style.borderColor = "";
+//                            document.getElementById("createPro").submit();
+//                        } else {
+//                            usernameError.textContent = "số điện thoại đã tồn tại. Vui lòng chọn tên khác.";
+//                            usernameError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                        }
+//                    }
+//                };
+//                xhrr.send();
+               
+
+//                if (isValid) {
+//                    document.getElementById("createPro").submit();
+//                }
+//            }
         </script>
 
 

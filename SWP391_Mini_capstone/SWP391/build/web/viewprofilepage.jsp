@@ -86,7 +86,7 @@
                             class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quay lại</span></a>
                                 </c:if>
                  <c:if test="${userlogin != null &&  userlogin.roleid.name eq 'manager'}">
-                                    <a class="app-menu__item" href="ManagerStaff"><i
+                                    <a class="app-menu__item" href="ManagerProductController"><i
                             class='app-menu__icon bx bx-id-card'></i><span class="app-menu__label">Quay lại</span></a>
                                 </c:if>
                 <c:if test="${userlogin != null &&  userlogin.roleid.name eq 'staff'}">

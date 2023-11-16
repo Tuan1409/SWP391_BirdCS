@@ -262,7 +262,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homepage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
+                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Tất cả lồng chim</a>
                                 <a href="viewprofileshop.jsp" class="nav-item nav-link">Liên lạc</a>
                                 <a href="CreateRequest?customerID=<%= customerID%>" class="nav-item nav-link">Đặt lồng chim</a>
                                 <%

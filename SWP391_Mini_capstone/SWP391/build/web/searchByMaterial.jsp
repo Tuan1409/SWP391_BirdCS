@@ -262,7 +262,7 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto py-0">
                                 <a href="homepage.jsp" class="nav-item nav-link active">Trang chủ</a>
-                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Lồng chim phổ biến</a>
+                                <a href="ProductSearchServlet?action=searchByName&productName=Lồng" class="nav-item nav-link">Tất cả lồng chim</a>
                                 <a href="viewprofileshop.jsp" class="nav-item nav-link">Liên lạc</a>
                                 <a href="CreateRequest?customerID=<%= customerID%>" class="nav-item nav-link">Đặt lồng chim</a>
                                 <%
@@ -391,22 +391,22 @@
 
                         <% for (int i = startIndex; i < endIndex; i++) { %>
                         <% Product product = searchResultsMaterial.get(i);%>
-                        <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
+                      <div class="col-lg-3 col-md-6 col-sm-6 pb-1">
                             <div class="product-item bg-light mb-4">
 
                                 <div class="product-img position-relative overflow-hidden">
-                                    <img class="img-fluid w-100" src="<%= product.getImage()%>" alt=""  style="width: 150px; height: 250px">
+                                    <img class="img-fluid w-100" src="img/<%= product.getImage()%>" alt=""  style="width: 150px; height: 250px">
                                     <div class="product-action">
-                                          <a class="btn btn-outline-dark btn-square"
-                                           href="CartServlet?action=add&pid=${product.productID}">
+                                       <a class="btn btn-outline-dark btn-square"
+                                           href="CartServlet?action=add&pid=<%=product.getProductID()%>">
                                             <i class="fa fa-shopping-cart"></i></a>
                                         <!--                                        <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
                                                                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>-->
-                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productId=<%=product.getProductID()%>"><i class="fa fa-search"></i></a>
+                                        <a class="btn btn-outline-dark btn-square" href="ProductDetailServlet?productID=<%=product.getProductID()%>"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="text-center py-4">
-                                    <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productId=<%=product.getProductID()%>"><%= product.getName()%></a>
+                                    <a class="h6 text-decoration-none text-truncate" href="ProductDetailServlet?productID=<%=product.getProductID()%>"><%= product.getName()%></a>
                                     <div class="d-flex align-items-center justify-content-center mt-2">
                                         <h5 style="color: red">₫<%= product.getPrice()%></h5><h6 class="text-muted ml-2"><del></del></h6>
                                     </div>

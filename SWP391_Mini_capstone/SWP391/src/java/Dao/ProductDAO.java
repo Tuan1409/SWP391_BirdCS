@@ -536,7 +536,7 @@ public class ProductDAO {
 
     public List<Product> searchProductsByName(String productName) {
         ArrayList<Product> list = new ArrayList<>(); 
-       String sql = "Select p.*,c.categoryName from Product p left join Category c on p.category = c.id where p.name like ? ";
+       String sql = "Select p.*,c.categoryName from Product p left join Category c on p.category = c.id where p.name like ? and p.code NOT LIKE 'LCD%'";
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -644,8 +644,8 @@ public class ProductDAO {
                 p.setRate_count(rs.getDouble(13));
                 p.setImage(rs.getString(14));
                
-            if (!p.getImage().contains("http")) {
-                   p.setImage("./img/" + p.getImage());              }
+  //          if (!p.getImage().contains("http")) {
+  //                 p.setImage("./img/" + p.getImage());              }
                 list.add(p);
                 
               }
@@ -745,7 +745,8 @@ public class ProductDAO {
     
     public static void main(String[] args){
         ProductDAO pdo = new ProductDAO();       
-        
+        List<Product> list = pdo.getAllProducts();
+        System.out.println(list.toString());
     }
 
     public List<Product> searchProductsByMaterial(String materialName) {
@@ -779,8 +780,8 @@ public class ProductDAO {
                 p.setRate_count(rs.getDouble(13));
                 p.setImage(rs.getString(14));
                
-            if (!p.getImage().contains("http")) {
-                   p.setImage("./img/" + p.getImage());              }
+      //      if (!p.getImage().contains("http")) {
+      //             p.setImage("./img/" + p.getImage());              }
                 list.add(p);
                 
               }

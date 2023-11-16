@@ -74,22 +74,19 @@ public class ProductSearchServlet extends HttpServlet {
                     HttpSession session = request.getSession();
                     if (session.getAttribute("searchResultsByName") != null) {
                         List<Product> searchResults = (List<Product>) session.getAttribute("searchResultsByName");
-                        products = productDAO.searchProductsByPriceRange(searchResults, minPrice, maxPrice);
-                    } if  (session.getAttribute("searchResultsMaterial") != null) {
-                        List<Product> searchResults = (List<Product>) session.getAttribute("searchResultsMaterial");
-                        products = productDAO.searchProductsByPriceRange(searchResults, minPrice, maxPrice);
+                       products = productDAO.searchProductsByPriceRange(searchResults,minPrice, maxPrice);
                     } 
-                    if (session.getAttribute("searchResultsCategory") != null) {
+                    else  if  (session.getAttribute("searchResultsMaterial") != null) {
+                        List<Product> searchResultss = (List<Product>) session.getAttribute("searchResultsMaterial");
+                        products = productDAO.searchProductsByPriceRange(searchResultss,minPrice, maxPrice);
+                    } 
+                    else  if (session.getAttribute("searchResultsCategory") != null) {
                         List<Product> searchResults = (List<Product>) session.getAttribute("searchResultsCategory");
-                        products = productDAO.searchProductsByPriceRange(minPrice, maxPrice);
-                    }else{
+                        products = productDAO.searchProductsByPriceRange(searchResults,minPrice, maxPrice);
+                    }else {
                         List<Product> searchResults = (List<Product>) session.getAttribute("searchResultsByName");
                         products = productDAO.searchProductsByPriceRange(minPrice, maxPrice);
                     }
-                    
-                    
-                    
-
                     session.setAttribute("searchResultsByPrice", products);
                     session.setAttribute("minPrice", minPrice);
                     session.setAttribute("maxPrice", maxPrice);
@@ -114,6 +111,7 @@ public class ProductSearchServlet extends HttpServlet {
                      HttpSession session = request.getSession(); 
                      session.setAttribute("searchResultsMaterial", products);
                      response.sendRedirect("searchByMaterial.jsp");
+                     return;
                  }
             }
              

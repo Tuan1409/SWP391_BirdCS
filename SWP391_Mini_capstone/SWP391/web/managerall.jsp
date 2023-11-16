@@ -31,7 +31,7 @@
         <main class="app-content">
             <div class="app-title"> 
                 <ul class="app-breadcrumb breadcrumb side">
-                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách người dùng </b></a></li>
+                    <li class="breadcrumb-item active"><a href="#"><b>Danh sách tài khoản công ty</b></a></li>
                 </ul>
                 <div id="clock"></div>
             </div>
@@ -78,7 +78,7 @@
 
                                             <th>ID</th>
                                             <th>Tên đệm</th>
-                                            <th>Tên sau</th>
+                                            <th>Tên</th>
                                             <th>Email</th>
                                             <th>Ảnh</th>
                                             <th>Địa chỉ</th>

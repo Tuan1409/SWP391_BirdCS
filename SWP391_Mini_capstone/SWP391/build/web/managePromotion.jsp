@@ -155,6 +155,7 @@
                                                 <form style="width: 35px" action="UpdatePromotion" method="post">
                                                     <input type="hidden" name="promotionID" value="${v.getId()}">
                                                     <input type="hidden" name="promotionName" value="${v.getName()}">
+                                                    <input type="hidden" name="promotionCondition" value="${v.getCondition()}">
                                                     <input type="hidden" name="dateStart" value="${v.getDateStart()}">
                                                     <input type="hidden" name="dateEnd" value="${v.getDateEnd()}">
                                                     <input type="hidden" name="promotionStatus" value="${v.isStatus()}">

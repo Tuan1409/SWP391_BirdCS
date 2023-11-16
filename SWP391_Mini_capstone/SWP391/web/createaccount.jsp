@@ -144,13 +144,13 @@
                          <div class="tile-body">
                              <form class="row" action="CreateAccount" method="post" enctype="multipart/form-data" id="createPro">
                                 <div class="form-group col-md-4">
-                                    <label class="control-label">Tên đầu</label>
+                                    <label class="control-label">Tên đệm</label>
                                     <input class="form-control" type="text"  name="firstname" id="name">
                                     <span id="nameError" class="error"></span>
                                 </div>
                                 
                                 <div class="form-group col-md-4">
-                                    <label class="control-label">Tên cuối</label>
+                                    <label class="control-label">Tên</label>
                                     <input class="form-control" type="text"  name="lastname" id="lastname">
                                     <span id="lastnameError" class="error"></span>
                                 </div>
@@ -254,77 +254,94 @@
         
         
   <script>
-function validateForm() {
-    var firstname = document.getElementById("name").value.trim();
-    var lastname = document.getElementById("lastname").value.trim();
-    var address = document.getElementById("address").value.trim();
-    var birthday = document.getElementById("birthday").value;
-    var pass = document.getElementById("pass").value.trim();
-    var username = document.getElementById("username").value.trim();
-    var phone = document.getElementById("phone").value.trim();
-    
-    var imageError = document.getElementById("imageError");
-    var nameError = document.getElementById("nameError");
-    var lastnameError = document.getElementById("lastnameError");
-    var addressError = document.getElementById("addressError");
-    var usernameError = document.getElementById("usernameError");
-    var passError = document.getElementById("passError");
-    var birthdayError = document.getElementById("birthdayError");
-    var phoneError = document.getElementById("phoneError");
+    function validateForm() {
+                var firstname = document.getElementById("name").value.trim();
+                var lastname = document.getElementById("lastname").value.trim();
+                var address = document.getElementById("address").value.trim();
+                var birthday = document.getElementById("birthday").value;
+                var pass = document.getElementById("pass").value.trim();
+                var username = document.getElementById("username").value.trim();
+                var phone = document.getElementById("phone").value.trim();
 
-    var fileInput = document.getElementById("uploadfile");
-    var file = fileInput.files[0];
+                var imageError = document.getElementById("imageError");
+                var nameError = document.getElementById("nameError");
+                var lastnameError = document.getElementById("lastnameError");
+                var addressError = document.getElementById("addressError");
+                var usernameError = document.getElementById("usernameError");
+                var passError = document.getElementById("passError");
+                var birthdayError = document.getElementById("birthdayError");
+                var phoneError = document.getElementById("phoneError");
 
-    var isValid = true;
+                var fileInput = document.getElementById("uploadfile");
+                var file = fileInput.files[0];
 
-    if (firstname === "") {
-        nameError.textContent = "Vui lòng nhập họ và tên.";
-        nameError.style.color = "red";
-        document.getElementById("name").style.borderColor = "red";
-        isValid = false;
-    } else if (firstname.length > 25) {
-        nameError.textContent = "Tên không quá 25 ký tự.";
-        nameError.style.color = "red";
-        document.getElementById("name").style.borderColor = "red";
-        isValid = false;
-    } else {
-        nameError.textContent = "";
-        nameError.style.color = "";
-        document.getElementById("name").style.borderColor = "";
-    }
+                var isValid = true;
 
-    if (lastname === "") {
-        lastnameError.textContent = "Vui lòng nhập họ và tên.";
-        lastnameError.style.color = "red";
-        document.getElementById("lastname").style.borderColor = "red";
-        isValid = false;
-    } else if (lastname.length > 25) {
-        lastnameError.textContent = "Tên không quá 25 ký tự.";
-        lastnameError.style.color = "red";
-        document.getElementById("lastname").style.borderColor = "red";
-        isValid = false;
-    } else {
-        lastnameError.textContent = "";
-        lastnameError.style.color = "";
-        document.getElementById("lastname").style.borderColor = "";
-    }
+                var selectedDate = new Date(document.getElementById("birthday").value);
+                // Get today's date
+                var today = new Date();
+                today.setHours(0, 0, 0, 0); // Set hours to midnight for accurate comparison
+//                if (selectedDate >= today) {
+//                    birthdayError.textContent = "Vui lòng chọn một ngày trước ngày hiện tại.";
+//                    birthdayError.style.color = "red";
+//                    document.getElementById("birthday").style.borderColor = "red";
+//                    isValid = false;
+//                } else {
+//                    birthdayError.textContent = "";
+//                    birthdayError.style.color = "";
+//                    document.getElementById("birthday").style.borderColor = "";
+//                }
 
-    if (address === "") {
-        addressError.textContent = "Vui lòng nhập địa chỉ.";
-        addressError.style.color = "red";
-        document.getElementById("address").style.borderColor = "red";
-        isValid = false;
-    } else if (address.length > 15) {
-        addressError.textContent = "Địa chỉ không quá 15 ký tự.";
-        addressError.style.color = "red";
-        document.getElementById("address").style.borderColor = "red";
-        isValid = false;
-    } else {
-        addressError.textContent = "";
-        addressError.style.color = "";
-        document.getElementById("address").style.borderColor = "";
-    }
-   
+
+
+                if (firstname === "") {
+                    nameError.textContent = "Vui lòng nhập họ và tên.";
+                    nameError.style.color = "red";
+                    document.getElementById("name").style.borderColor = "red";
+                    isValid = false;
+                } else if (firstname.length > 25) {
+                    nameError.textContent = "Tên không quá 25 ký tự.";
+                    nameError.style.color = "red";
+                    document.getElementById("name").style.borderColor = "red";
+                    isValid = false;
+                } else {
+                    nameError.textContent = "";
+                    nameError.style.color = "";
+                    document.getElementById("name").style.borderColor = "";
+                }
+
+                if (lastname === "") {
+                    lastnameError.textContent = "Vui lòng nhập họ và tên.";
+                    lastnameError.style.color = "red";
+                    document.getElementById("lastname").style.borderColor = "red";
+                    isValid = false;
+                } else if (lastname.length > 25) {
+                    lastnameError.textContent = "Tên không quá 25 ký tự.";
+                    lastnameError.style.color = "red";
+                    document.getElementById("lastname").style.borderColor = "red";
+                    isValid = false;
+                } else {
+                    lastnameError.textContent = "";
+                    lastnameError.style.color = "";
+                    document.getElementById("lastname").style.borderColor = "";
+                }
+
+                if (address === "") {
+                    addressError.textContent = "Vui lòng nhập địa chỉ.";
+                    addressError.style.color = "red";
+                    document.getElementById("address").style.borderColor = "red";
+                    isValid = false;
+                } else if (address.length > 15) {
+                    addressError.textContent = "Địa chỉ không quá 15 ký tự.";
+                    addressError.style.color = "red";
+                    document.getElementById("address").style.borderColor = "red";
+                    isValid = false;
+                } else {
+                    addressError.textContent = "";
+                    addressError.style.color = "";
+                    document.getElementById("address").style.borderColor = "";
+                }
+
 
 //    if (phone === "") {
 //        phoneError.textContent = "Vui lòng nhập số điện thoại.";
@@ -342,117 +359,146 @@ function validateForm() {
 //        document.getElementById("phone").style.borderColor = "";
 //    }
 
-    if (birthday === "") {
-        birthdayError.textContent = "Vui lòng chọn ngày sinh";
-        birthdayError.style.color = "red";
-        document.getElementById("birthday").style.borderColor = "red";
-        isValid = false;
-    } else {
-        birthdayError.textContent = "";
-        birthdayError.style.color = "";
-        document.getElementById("birthday").style.borderColor = "";
-    }
-
-    if (pass === "") {
-        passError.textContent = "Vui lòng nhập mật khẩu.";
-        passError.style.color = "red";
-        document.getElementById("pass").style.borderColor = "red";
-        isValid = false;
-    } else if (pass.length < 3 || pass.length > 100) {
-        passError.textContent = "Mật khẩu kém.";
-        passError.style.color = "red";
-        document.getElementById("pass").style.borderColor = "red";
-        isValid = false;
-    } else if (/[^a-zA-Z0-9]/.test(pass)) {
-        passError.textContent = "Mật khẩu không được chứa ký tự đặt biệt.";
-        passError.style.color = "red";
-        document.getElementById("pass").style.borderColor = "red";
-        isValid = false;
-    } else {
-        passError.textContent = "";
-        passError.style.color = "";
-        document.getElementById("pass").style.borderColor = "";
-    }
-   
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'LoadEmail?email=' + username, true);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText);
-              if (username === "") {
-         usernameError.textContent = "Vui lòng nhập tên đăng nhập.";
-         usernameError.style.color = "red";
-         document.getElementById("username").style.borderColor = "red";
-         isValid = false;
-                }else if (!username.endsWith("@gmail.com")) {
-        usernameError.textContent = "Email phải kết thúc bằng '@gmail.com'.";
-        usernameError.style.color = "red";
-        document.getElementById("username").style.borderColor = "red";
-         isValid = false;
-                } else if (username.length < 10 || username.length > 100) {
-          usernameError.textContent = "Địa chỉ không đúng định dạng.";
-           usernameError.style.color = "red";
-          document.getElementById("username").style.borderColor = "red";
-          isValid = false;
+                if (birthday === "") {
+                    birthdayError.textContent = "Vui lòng chọn ngày sinh";
+                    birthdayError.style.color = "red";
+                    document.getElementById("birthday").style.borderColor = "red";
+                    isValid = false;
+                } else if (selectedDate >= today) {
+                    birthdayError.textContent = "Vui lòng chọn một ngày trước ngày hiện tại.";
+                    birthdayError.style.color = "red";
+                    document.getElementById("birthday").style.borderColor = "red";
+                    isValid = false;
+                } else {
+                    birthdayError.textContent = "";
+                    birthdayError.style.color = "";
+                    document.getElementById("birthday").style.borderColor = "";
                 }
-           else if (response.available) {
-                usernameError.textContent = "";
-                usernameError.style.color = "";
-                document.getElementById("username").style.borderColor = "";
-                document.getElementById("createPro").submit();
-            } else {
-                usernameError.textContent = "Tên đăng nhập đã tồn tại. Vui lòng chọn tên khác.";
+                 if(phone ===""){
+                            phoneError.textContent = "Vui lòng nhập số điện thoại.";
+                            phoneError.style.color = "red";
+                            document.getElementById("phone").style.borderColor = "red";
+                            isValid = false;
+                }else if(phone.length < 10 || phone.length > 12){
+                     phoneError.textContent = "số điện thoại không đúng định dạng.";
+                            phoneError.style.color = "red";
+                            document.getElementById("phone").style.borderColor = "red";
+                            isValid = false;
+                }else{
+                       phoneError.textContent = "";
+                         phoneError.style.color = "";
+                       document.getElementById("phone").style.borderColor = "";
+                      
+                }
+                if (pass === "") {
+                    passError.textContent = "Vui lòng nhập mật khẩu.";
+                    passError.style.color = "red";
+                    document.getElementById("pass").style.borderColor = "red";
+                    isValid = false;
+                } else if (pass.length < 3 || pass.length > 100) {
+                    passError.textContent = "Mật khẩu kém.";
+                    passError.style.color = "red";
+                    document.getElementById("pass").style.borderColor = "red";
+                    isValid = false;
+                } else if (/[^a-zA-Z0-9]/.test(pass)) {
+                    passError.textContent = "Mật khẩu không được chứa ký tự đặt biệt.";
+                    passError.style.color = "red";
+                    document.getElementById("pass").style.borderColor = "red";
+                    isValid = false;
+                } else {
+                    passError.textContent = "";
+                    passError.style.color = "";
+                    document.getElementById("pass").style.borderColor = "";
+                }
+                 if (!file) {
+                    document.getElementById("uploadfile").classList.add("error-input");
+                    imageError.textContent = "Vui lòng chọn ảnh.";
+                    imageError.style.color = "red";
+                    isValid = false;
+                } else {
+                    document.getElementById("uploadfile").classList.remove("error-input");
+                    imageError.textContent = "";
+                    imageError.style.color = "";
+                }
+                 if (username === "") {
+                usernameError.textContent = "Vui lòng nhập tên đăng nhập.";
                 usernameError.style.color = "red";
                 document.getElementById("username").style.borderColor = "red";
+                isValid = false;
+                }else if(!username.endsWith("@gmail.com")){
+                    usernameError.textContent = "Email phải kết thúc bằng '@gmail.com'.";
+                    usernameError.style.color = "red";
+                     document.getElementById("username").style.borderColor = "red";
+                     isValid = false;
+                 }
+                else if (username.length < 10 || username.length > 100) {
+                    usernameError.textContent = "Địa chỉ không đúng định dạng.";
+                     usernameError.style.color = "red";
+                         document.getElementById("username").style.borderColor = "red";
+                        isValid = false;
+                }else{
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'LoadEmail', true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                       var usernames = JSON.parse(xhr.responseText);
+                         if (usernames.includes(username)) {
+                            usernameError.textContent = "Email đã tồn tại vui lòng chọn tên khác.";
+                            usernameError.style.color = "red";
+                            document.getElementById("username").style.borderColor = "";
+                             isValid = false;
+                        } else {
+                             usernameError.textContent = "";
+                             usernameError.style.color = "";
+                             document.getElementById("username").style.borderColor = "";
+                             
+                             
+                             if(isValid && firstname && lastname &&address && birthday && pass && file && phone){
+                                   document.getElementById("createPro").submit();
+                             }
+
+                        }
+                    }
+                      
+                };
+                  xhr.send();
             }
         }
-    };
-    xhr.send();
 
-     var xhrr = new XMLHttpRequest();
-    xhrr.open('GET', 'LoadPhone?phone=' + phone, true);
-    xhrr.onreadystatechange = function () {
-        if (xhrr.readyState === 4 && xhrr.status === 200) {
-            var response = JSON.parse(xhrr.responseText);
-              if (username === "") {
-         phoneError.textContent = "Vui lòng nhập số điện thoại.";
-         phoneError.style.color = "red";
-         document.getElementById("phone").style.borderColor = "red";
-         isValid = false;
-             } else if (phone.length > 10 || phone.length < 11) {
-          phoneError.textContent = "Số điện thoại không đúng định dạng.";
-          phoneError.style.color = "red";
-          document.getElementById("phone").style.borderColor = "red";
-          isValid = false;
-                }
-           else if (response.available) {
-                phoneError.textContent = "";
-                phoneError.style.color = "";
-                document.getElementById("phone").style.borderColor = "";
-                document.getElementById("createPro").submit();
-            } else {
-                usernameError.textContent = "số điện thoại đã tồn tại. Vui lòng chọn tên khác.";
-                usernameError.style.color = "red";
-                document.getElementById("phone").style.borderColor = "red";
-            }
-        }
-    };
-    xhrr.send();
-    if (!file) {
-        document.getElementById("uploadfile").classList.add("error-input");
-        imageError.textContent = "Vui lòng chọn ảnh.";
-        imageError.style.color = "red";
-        isValid = false;
-    } else {
-        document.getElementById("uploadfile").classList.remove("error-input");
-        imageError.textContent = "";
-        imageError.style.color = "";
-    }
+//                var xhrr = new XMLHttpRequest();
+//                xhrr.open('GET', 'LoadPhone?phone=' + phone, true);
+//                xhrr.onreadystatechange = function () {
+//                    if (xhrr.readyState === 4 && xhrr.status === 200) {
+//                        var response = JSON.parse(xhrr.responseText);
+//                        if (username === "") {
+//                            phoneError.textContent = "Vui lòng nhập số điện thoại.";
+//                            phoneError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                            isValid = false;
+//                        } else if (phone.length > 10 || phone.length < 11) {
+//                            phoneError.textContent = "Số điện thoại không đúng định dạng.";
+//                            phoneError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                            isValid = false;
+//                        } else if (response.available) {
+//                            phoneError.textContent = "";
+//                            phoneError.style.color = "";
+//                            document.getElementById("phone").style.borderColor = "";
+//                            document.getElementById("createPro").submit();
+//                        } else {
+//                            usernameError.textContent = "số điện thoại đã tồn tại. Vui lòng chọn tên khác.";
+//                            usernameError.style.color = "red";
+//                            document.getElementById("phone").style.borderColor = "red";
+//                        }
+//                    }
+//                };
+//                xhrr.send();
+               
 
-    if (isValid) {
-        document.getElementById("createPro").submit();
-    }
-}
+//                if (isValid) {
+//                    document.getElementById("createPro").submit();
+//                }
+//            }
 </script>
 
         

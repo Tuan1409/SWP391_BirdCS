@@ -66,6 +66,7 @@ public class UpdatePromotion extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         int promotionID = Integer.parseInt(request.getParameter("promotionID"));
         String promotionName = request.getParameter("promotionName");
+        int promotionCondition = Integer.parseInt(request.getParameter("promotionCondition"));
         Date dateStart = Date.valueOf(request.getParameter("dateStart"));
         Date dateEnd = Date.valueOf(request.getParameter("dateEnd"));
         boolean promotionStatus = true;
@@ -85,8 +86,14 @@ public class UpdatePromotion extends HttpServlet {
         }else if (value < 0){
             request.setAttribute("messUpdatePromotion", "Cập nhật thất bại! Vui lòng kiểm tra lại 'Giá trị'.");
             request.getRequestDispatcher("promotion").forward(request, response);
+        }else if (promotionCondition < 0){
+            request.setAttribute("messUpdatePromotion", "Cập nhật thất bại! Vui lòng kiểm tra lại 'Điều kiện'.");
+            request.getRequestDispatcher("promotion").forward(request, response);
+        }else if (promotionCondition % 1 != 0){
+            request.setAttribute("messUpdatePromotion", "Cập nhật thất bại! Vui lòng kiểm tra lại 'Điều kiện'.");
+            request.getRequestDispatcher("promotion").forward(request, response);
         }else {
-            objectDao.updatePromotion(promotionID, promotionName, dateStart, dateEnd, promotionStatus, value, accID);
+            objectDao.updatePromotion(promotionID, promotionName, dateStart, dateEnd, promotionStatus, value, accID, promotionCondition);
             request.setAttribute("messUpdatePromotion", "Cập nhật promotion thành công!");
             request.getRequestDispatcher("promotion").forward(request, response);
         }
@@ -106,6 +113,7 @@ public class UpdatePromotion extends HttpServlet {
        request.setCharacterEncoding("UTF-8");
         int promotionID = Integer.parseInt(request.getParameter("promotionID"));
         String promotionName = request.getParameter("promotionName");
+        String promotionCondition = request.getParameter("promotionCondition");
         Date dateStart = Date.valueOf(request.getParameter("dateStart"));
         Date dateEnd = Date.valueOf(request.getParameter("dateEnd"));
         boolean promotionStatus = Boolean.valueOf(request.getParameter("promotionStatus"));
@@ -116,6 +124,7 @@ public class UpdatePromotion extends HttpServlet {
 
         request.setAttribute("promotionID", promotionID);
         request.setAttribute("promotionName", promotionName);
+        request.setAttribute("promotionCondition", promotionCondition);
         request.setAttribute("dateStart", dateStart);
         request.setAttribute("dateEnd", dateEnd);
         request.setAttribute("promotionStatus", promotionStatus);

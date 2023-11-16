@@ -155,7 +155,7 @@ function changeUserImage(event) {
                                 <div class="ibox-body">
                                     <ul class="nav nav-tabs tabs-line">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="ti-settings"></i> Hồ sơ</a>
+                                            <a class="nav-link active" href="#tab-1" data-toggle="tab"><i class="ti-settings"></i>Thay đổi mật khẩu</a>
                                         </li>
                                     </ul>
               <div class="tab-content">
@@ -164,18 +164,18 @@ function changeUserImage(event) {
                          <input name="id" type="text" value="${sessionScope.userlogin.id}" hidden="">
                               <div class="form-group">
                                                     <label>Mật khẩu cũ</label>
-                                                    <input name="password" class="form-control" type="password" placeholder="Password">
+                                                    <input name="password" class="form-control" type="password" placeholder="Nhập mật khẩu cũ">
                                                 </div>
                                 <c:if test="${requestScope.EDIT_ERROR != null}">
                                                     <div class="error-message color-red">${requestScope.EDIT_ERROR.notMatchPassword}</div>
                                                 </c:if>
                                          <div class="form-group">
                                                     <label>Mật khẩu mới</label>
-                                                    <input name="newPassword" class="form-control" type="password" placeholder="New Password">
+                                                    <input name="newPassword" class="form-control" type="password" placeholder="Nhập mật khẩu mới">
                                                 </div>     
                                                      <div class="form-group">
                                                     <label>Nhập lại mật khẩu</label>
-                                                    <input name="confirm" class="form-control" type="password" placeholder="Confirm">
+                                                    <input name="confirm" class="form-control" type="password" placeholder="Nhập lại mật khẩu mới">
                                                 </div>
                                                 <c:if test="${requestScope.EDIT_SUCCESS != null}">
                                                     <div class="error-message color-green">${requestScope.EDIT_SUCCESS}</div>

@@ -107,6 +107,7 @@ public class UpdateRequest extends HttpServlet {
         int accID = Integer.parseInt(request.getParameter("accountID"));
         String accName = request.getParameter("accountName");
         String staffName = request.getParameter("staffName");
+        System.out.println(staffName + "Update Request");
         
         
         request.setAttribute("ID", ID);

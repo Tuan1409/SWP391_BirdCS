@@ -390,6 +390,13 @@
         </script>
         <script>
             function validateForm() {
+                function isDecimal(number) {
+                            // Convert the number to a string
+                            var numberAsString = number.toString();
+
+                            // Check if the string representation contains a decimal point
+                            return numberAsString.includes(".");
+                        }
                 var tensp = document.getElementById("tensp").value.trim();
                 var quantity = document.getElementById("quantity").value.trim();
                 var size = document.getElementById("size").value.trim();
@@ -422,7 +429,14 @@
                     document.getElementById("quantity").style.borderColor = "red";
                     isValid = false;
 
-                } else {
+                }else if (isDecimal(quantity)) {
+                    document.getElementById("quantity").classList.add("error-input");
+                    document.getElementById("quantity-error").textContent = "Số lượng phải là một số nguyên.";
+                    document.getElementById("quantity-error").style.color = "red";
+                    document.getElementById("quantity").style.borderColor = "red";
+                    isValid = false;
+
+                }  else {
                     document.getElementById("quantity").classList.remove("error-input");
                     document.getElementById("quantity-error").textContent = "";
                     document.getElementById("quantity-error").style.color = "";
@@ -430,7 +444,7 @@
                 }
                 if (size === "") {
                     document.getElementById("size").classList.add("error-input");
-                    document.getElementById("size-error").textContent = "Vui lòng nhập hình dang va kích thước.";
+                    document.getElementById("size-error").textContent = "Vui lòng nhập hình dáng va kích thước.";
                     document.getElementById("size-error").style.color = "red";
                     document.getElementById("size").style.borderColor = "red";
                     isValid = false;

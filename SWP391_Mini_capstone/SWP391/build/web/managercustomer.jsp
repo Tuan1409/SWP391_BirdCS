@@ -94,7 +94,7 @@
                                             
                                     <th>ID</th>
                                          <th>Tên đầu</th>
-                                         <th>Tên đệm</th>
+                                         <th>Tên</th>
                                      <th>Email</th>
                                       <th></th>
                                      <th>Địa chỉ</th>
@@ -130,10 +130,10 @@
                                                  <td>${user.phone}</td>
                                                  <td>
                                                     <c:if test="${user.isActive == true}">
-                                                         <span class="badge bg-success">tài khoản đang dùng</span>
+                                                         <span class="badge bg-success">Tài khoản đang hoạt động</span>
                                                     </c:if>
                                                     <c:if test="${user.isActive == false}">
-                                                         <span class="badge bg-danger">tài khoản đã bị khóa</span>
+                                                         <span class="badge bg-danger">Tài khoản đã bị khóa</span>
                                                     </c:if>
                                                 </td>
                                                 <td style="display: flex; justify-content: space-left">
@@ -255,7 +255,7 @@
 
                                 swal({
                                     title: "Cảnh báo",
-                                    text: "Bạn có muốn xoá tài khoản này?",
+                                    text: "Bạn có muốn khóa tài khoản này?",
                                     buttons: ["Hủy bỏ", "Đồng ý"],
                                 }).then((willDelete) => {
                                     if (willDelete) {
